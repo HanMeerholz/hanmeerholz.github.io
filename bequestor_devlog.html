@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+
+  <!--- basic page needs
+    ================================================== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Han Meerholz</title>
+
+  <script>
+    document.documentElement.classList.remove('no-js');
+    document.documentElement.classList.add('js');
+  </script>
+
+  <!-- CSS
+    ================================================== -->
+  <link rel="stylesheet" href="css/vendor.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- favicons
+    ================================================== -->
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+
+</head>
+
+
+<body id="top">
+
+
+  <!-- preloader
+    ================================================== -->
+  <div id="preloader">
+    <div id="loader" class="line"></div>
+  </div>
+
+
+  <!-- page wrap
+    ================================================== -->
+  <div id="page" class="s-pagewrap">
+
+
+    <!-- # site header 
+        ================================================== -->
+    <header id="masthead" class="s-header">
+
+      <div class="s-header__block">
+        <div class="s-header__branding">
+          <p class="site-title">
+            <a href="index.html" rel="home">Han</a>
+          </p>
+        </div>
+
+        <a class="s-header__menu-toggle" href="#0"><span>Menu</span></a>
+      </div> <!-- end s-header__block -->
+
+      <div class="row s-header__nav-wrap">
+
+        <nav class="s-header__nav">
+          <ul>
+            <li class="current"><a href="#intro" class="smoothscroll">Intro</a></li>
+            <li><a href="#about" class="smoothscroll">About</a></li>
+            <li><a href="#games" class="smoothscroll">Games</a></li>
+            <li><a href="#colophon" class="smoothscroll">Contact</a></li>
+          </ul>
+        </nav> <!-- end s-header__nav -->
+
+        <ul class="s-header__social">
+          <li>
+            <a href="https://www.linkedin.com/in/han-meerholz/">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512"
+                style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z">
+                </path>
+              </svg>
+
+              <span class="u-screen-reader-text">LinkedIn</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/HanMeerholz/">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z">
+                </path>
+              </svg>
+              <span class="u-screen-reader-text">Github</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://theanachronist.itch.io/">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"
+                style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M 16 5 C 12.748 5 8.3121094 5.0508594 7.4121094 5.1308594 C 6.4021094 5.7368594 4.4028125 8.0309531 4.3828125 8.6269531 L 4.3828125 9.6269531 C 4.3828125 10.889953 5.5657188 12 6.6367188 12 C 7.9197187 12 8.9902344 10.929969 8.9902344 9.6679688 C 8.9902344 10.929969 10.0305 12 11.3125 12 C 12.6055 12 13.605469 10.930969 13.605469 9.6679688 C 13.605469 10.929969 14.695281 12 15.988281 12 L 16.009766 12 C 17.302766 12 18.392578 10.930969 18.392578 9.6679688 C 18.392578 10.929969 19.402547 12 20.685547 12 C 21.968547 12 23.009766 10.930969 23.009766 9.6679688 C 23.009766 10.929969 24.080281 12 25.363281 12 C 26.434281 12 27.615234 10.889953 27.615234 9.6269531 L 27.615234 8.6269531 C 27.595234 8.0309531 25.595938 5.7368594 24.585938 5.1308594 C 21.443938 5.0198594 19.252 5 16 5 z M 13.550781 11.742188 C 12.497781 13.552188 9.8523125 13.573906 8.8203125 11.753906 C 8.1903125 12.845906 6.7642969 13.267547 6.1542969 13.060547 C 5.9762969 14.959547 5.8534844 24.70875 7.1464844 26.34375 C 10.943484 27.22875 21.164516 27.20975 24.853516 26.34375 C 26.348516 24.81975 26.013703 14.821547 25.845703 13.060547 C 25.235703 13.267547 23.809453 12.845906 23.189453 11.753906 C 22.146453 13.573906 19.501219 13.552188 18.449219 11.742188 C 18.124219 12.332187 17.367 13.109375 16 13.109375 C 14.997 13.148375 14.051781 12.607187 13.550781 11.742188 z M 11.419922 14 C 12.219922 14 12.950078 14.000469 13.830078 14.980469 C 15.280078 14.830469 16.719922 14.830469 18.169922 14.980469 C 19.059922 14.010469 19.780078 14.009766 20.580078 14.009766 C 23.160078 14.009766 23.780937 17.819609 24.710938 21.099609 C 25.550938 24.149609 24.429062 24.230469 23.039062 24.230469 C 20.969062 24.150469 19.820313 22.650625 19.820312 21.140625 C 17.890313 21.460625 14.809688 21.580625 12.179688 21.140625 C 12.179688 22.650625 11.030938 24.150469 8.9609375 24.230469 C 7.5709375 24.230469 6.4490625 24.149609 7.2890625 21.099609 C 8.2190625 17.799609 8.8399219 14.009766 11.419922 14.009766 L 11.419922 14 z M 16 16.876953 C 16 16.876953 14.306 18.439375 14 18.984375 L 15.107422 18.943359 L 15.107422 19.910156 C 15.107422 19.968156 15.926 19.917969 16 19.917969 C 16.447 19.934969 16.892578 19.951156 16.892578 19.910156 L 16.892578 18.943359 L 18 18.984375 C 17.694 18.438375 16 16.876953 16 16.876953 z" />
+              </svg>
+              <span class="u-screen-reader-text">Itch.io</span>
+            </a>
+          </li>
+        </ul> <!-- end s-header__social -->
+      </div> <!-- end s-header__nav-wrap -->
+    </header> <!-- end s-header -->
+
+    <section id="blog" class="s-about">
+      <div class="row">
+        <div class="column lg-12">
+          <h1>Bequestor: <br> A Versatile Quest System</h1>
+
+          <h2>Introduction</h2>
+
+          <p>
+            Quest systems are omnipresent in videogames, and have evolved far beyond the simple "kill 10 goblins in the
+            woods"
+            present in classic RPGs. Nowadays, you can find some kind of quest system in anything from modern RPGs like
+            Cyberpunk 2077 to Metroidvanias like Hollow Knight: Silksong; from sandbox games like Minecraft, to Discord
+            (yes,
+            the social platform).
+          </p>
+
+          <p>
+            <em>But how do you go about creating your own quest system for a game? How do you even define a quest in the
+              first place?</em>
+          </p>
+
+          <p>
+            To answer this, I have created my own quest design tool and quest system C++ library, <em>Bequestor</em>.
+            In this blog post, I will show how to use this tool for yourself, and for those more technically inclined
+            and
+            interested, there are additional sections on implementation details.
+          </p>
+
+          <!-- Screenshot of tool in action. -->
+
+          <h2>Setup</h2>
+
+          <p>
+            This tool consists of two parts: the <em>Quest Creator</em>, a quest creation tool written in Python in
+            which you can create, edit,
+            import, and export quests to a JSON format; and the <em>Bequestor Library</em> a C++ library which can read
+            this JSON file, store the
+            quests, and update them.
+          </p>
+
+          <h3>Quest Creator</h3>
+
+          <p>
+            In order to run the quest creator tool, traverse to the <code>quest_creator</code> folder, create a virtual
+            environment, open the command prompt, and execute the following commands:
+          </p>
+
+          <pre>
+            pip install -r requirements.txt
+            python quest_creation_tool.py
+          </pre>
+
+          <p>
+            Alternatively, you can run the <code>runme.bat</code> file, which creates a virtual environment and executes
+            the commands for you.
+          </p>
+
+          <p>
+            If you use Visual Studio Code, you can also do the following:
+            Press <code>Ctrl+Shift+P</code> &rarr; Python: Create Environment... &rarr; Venv &rarr; Select Python
+            version &rarr; check <code>requirements.txt</code> &rarr; press OK.<br>
+            Then simply open <code>quest_creation_tool.py</code> and run it from the editor.
+          </p>
+
+          <h3>Bequestor Library</h3>
+          <p>
+            TODO figure this out
+          </p>
+
+          <h2>Creating a simple quest</h2>
+
+          <h3>Basic information</h3>
+
+          <p>
+            When opening the Quest Creator tool, you are greeted with the following screen:
+          </p>
+
+          <img src="images/blog/quest_creator_startup.png">
+
+          <p>
+            You can now press "Add Quest" to add a quest and give it a name and description. You can also collapse or
+            delete your created quest with the buttons to the right. You can add as many quests as you want, but it is
+            recommended to give them different names.
+          </p>
+
+          <h3>Prerequisites</h3>
+          <h3>Objectives</h3>
+
+          <h2>Registering your quest to your game</h2>
+          <h3>Register preset prerequisites</h3>
+          <h4 class="collapsible">Under the hood</h4>
+          <h3>Dispatching events</h3>
+          <h4 class="collapsible">Under the hood</h4>
+
+          <h2>Advanced features</h2>
+          <h3>Custom parameters</h3>
+          <h4 class="collapsible">Under the hood</h4>
+          <h3>Objective dependencies</h3>
+          <h4 class="collapsible">Under the hood</h4>
+
+          <h2>Conclusion</h2>
+        </div>
+      </div>
+    </section>
+
+  </div> <!-- end s-pagewrap -->
+  <!-- Java Script
+    ================================================== -->
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
