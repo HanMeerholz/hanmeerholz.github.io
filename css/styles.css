@@ -4181,3 +4181,54 @@ img.u-pull-left {
         width: 1.6rem;
     }
 }
+
+/* BLOG POST STYLES */
+/* Credit to W3Schools (https://www.w3schools.com/howto/howto_js_collapsible.asp) */
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+    background-color: var(--color-gray-17);
+    color: var(--color-gray-3);
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.collapsible:hover {
+    background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.collapsible_content {
+    padding: 0 18px;
+    background-color: var(--color-gray-17);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 1.0s ease-out;
+}
+
+.collapsible_content .collapsible {
+    background-color: var(--color-body);
+}
+
+.collapsible_content .collapsible_content {
+    background-color: var(--color-body);
+}
+
+.collapsible:after {
+    content: '\2B9E';
+    /* Unicode character for "plus" sign (+) */
+    font-size: 24px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2B9F";
+    /* Unicode character for "minus" sign (-) */
+}

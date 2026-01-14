@@ -18,6 +18,7 @@
     ================================================== -->
   <link rel="stylesheet" href="css/vendor.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/highlight/atom-one-dark.min.css">
 
   <!-- favicons
     ================================================== -->
@@ -59,16 +60,6 @@
       </div> <!-- end s-header__block -->
 
       <div class="row s-header__nav-wrap">
-
-        <nav class="s-header__nav">
-          <ul>
-            <li class="current"><a href="#intro" class="smoothscroll">Intro</a></li>
-            <li><a href="#about" class="smoothscroll">About</a></li>
-            <li><a href="#games" class="smoothscroll">Games</a></li>
-            <li><a href="#colophon" class="smoothscroll">Contact</a></li>
-          </ul>
-        </nav> <!-- end s-header__nav -->
-
         <ul class="s-header__social">
           <li>
             <a href="https://www.linkedin.com/in/han-meerholz/">
@@ -156,24 +147,27 @@
           <h3>Quest Creator</h3>
 
           <p>
-            In order to run the quest creator tool, traverse to the <code>quest_creator</code> folder, create a virtual
+            In order to run the quest creator tool, traverse to the <code class="hljs">quest_creator</code> folder,
+            create a virtual
             environment, open the command prompt, and execute the following commands:
           </p>
 
-          <pre>
-pip install -r requirements.txt
-python quest_creation_tool.py</pre>
+          <pre><code class="language-plaintext">pip install -r requirements.txt
+python quest_creation_tool.py</code></pre>
 
           <p>
-            Alternatively, you can run the <code>runme.bat</code> file, which creates a virtual environment and executes
+            Alternatively, you can run the <code class=" hljs">runme.bat</code> file, which creates a virtual
+            environment
+            and executes
             the commands for you.
           </p>
 
           <p>
             If you use Visual Studio Code, you can also do the following:
-            Press <code>Ctrl+Shift+P</code> &rarr; Python: Create Environment... &rarr; Venv &rarr; Select Python
-            version &rarr; check <code>requirements.txt</code> &rarr; press OK.<br>
-            Then simply open <code>quest_creation_tool.py</code> and run it from the editor.
+            Press <code class="hljs">Ctrl+Shift+P</code> &rarr; Python: Create Environment... &rarr; Venv &rarr; Select
+            Python
+            version &rarr; check <code class="hljs">requirements.txt</code> &rarr; press OK.<br>
+            Then simply open <code class="hljs">quest_creation_tool.py</code> and run it from the editor.
           </p>
 
           <h3>Bequestor Library</h3>
@@ -236,30 +230,32 @@ python quest_creation_tool.py</pre>
 
           <p>
             In order to use the Bequestor library in your own game and use the quest you've just created, we first need
-            to create a <code>QuestManager</code>. In my game's <code>QuestSystem</code> header file, I declare a
+            to create a <code class="hljs">QuestManager</code>. In my game's <code class="hljs">QuestSystem</code>
+            header file, I declare a
             pointer
-            to it: <code>std::shared_ptr&lt;Bequestor::QuestManager> questManager;</code>.
+            to it: <code class="hljs">std::shared_ptr&lt;Bequestor::QuestManager> questManager;</code>.
           </p>
 
           <p>
-            Then in the constructor implementation (using the <code>std</code> and <code>Bequestor</code> namespaces) I
+            Then in the constructor implementation (using the <code class="hljs">std</code> and <code
+              class="hljs">Bequestor</code> namespaces) I
             construct the quest manager, and load in the JSON file we exported earlier.
           </p>
 
-          <pre>
-questManager = make_shared&lt;QuestManager>();
-questManager->Load("../quest_creator/batman_quests.json");</pre>
+          <pre><code>questManager = make_shared&lt;QuestManager>();
+questManager->Load("../quest_creator/batman_quests.json");</code></pre>
 
           <p>
-            You also need to make sure to call <code>QuestManager::Update()</code> whenever you want your quests to
+            You also need to make sure to call <code class="hljs">QuestManager::Update()</code> whenever you want your
+            quests to
             update.
-            I call this once per second in my <code>UpdatePerTick()</code> function:
-            <code>void QuestSystem::UpdatePerTick() { questManager->Update(); }</code>
+            I call this once per second in my <code class="hljs">UpdatePerTick()</code> function:
+            <code class="hljs">void QuestSystem::UpdatePerTick() { questManager->Update(); }</code>
           </p>
 
           <p>
             Running the game right now works, but every second, I get an error message:
-            <code>No prerequisite checker for Is In Location exists.</code>
+            <code class="hljs">No prerequisite checker for Is In Location exists.</code>
 
           </p>
 
@@ -267,19 +263,21 @@ questManager->Load("../quest_creator/batman_quests.json");</pre>
 
           <p>
             In order to check for the quests' prerequisites, we need some way to actually query your game's state.
-            For each of the prerequisites used, we must supply a <code>PrerequisiteChecker</code>. Luckily, for the
+            For each of the prerequisites used, we must supply a <code class="hljs">PrerequisiteChecker</code>. Luckily,
+            for the
             preset prerequisites this is easy. There are functions available
-            <code>QuestManager::WithLocationChecker()</code>, <code>QuestManager::WithItemChecker()</code>,
-            <code>QuestManager::WithExperienceChecker()</code>, and <code>QuestManager::WithGoldChecker()</code>. These
+            <code class="hljs">QuestManager::WithLocationChecker()</code>, <code
+              class="hljs">QuestManager::WithItemChecker()</code>,
+            <code class="hljs">QuestManager::WithExperienceChecker()</code>, and <code
+              class="hljs">QuestManager::WithGoldChecker()</code>. These
             are builder functions and can be called using function chaining. Each of these functions take a function
             argument. For the location checker for example, it expects a function that takes the location id and returns
             whether the player is in that location. For the item checker the function takes an item id and returns the
             number of items of that id that the player has. As an example in my own demo game, which uses an ECS system,
-            I've replaced <code>questManager = make_shared<QuestManager>()</code> with the following code:
+            I've replaced <code class="hljs">questManager = make_shared<QuestManager>()</code> with the following code:
           </p>
 
-          <pre>
-questManager = make_shared&lt;QuestManager>(
+          <pre><code>questManager = make_shared&lt;QuestManager>(
 QuestManager()
   .WithLocationChecker(
     [](string locationName) -> bool
@@ -297,10 +295,11 @@ QuestManager()
         if (item.type == itemName && inventory.actorId == playerEntity) return item.amount;
       return 0;
     })
-);</pre>
+);</code></pre>
 
           <p>
-            Now we can get the active quests with <code>QuestManager::GetActiveQuests()</code>. I gave my player
+            Now we can get the active quests with <code class="hljs">QuestManager::GetActiveQuests()</code>. I gave my
+            player
             the batarangs at the start of the game. In the first image I had not yet entered the "Batcave" area,
             so the quest did not show up on my ImGUI panel. In the second image, I had entered the Batcave, and
             the quest appeared.
@@ -313,49 +312,53 @@ QuestManager()
             alt="A screenshot of the game where the player in in the cave area and the quest has shown up and is showing the two prerequisites.">
 
           <h4 class="collapsible">Under the hood</h4>
-
-          <p>TODO</p>
-
+          <div class="collapsible_content">
+            <p>TODO</p>
+          </div>
           <h3>Dispatching events</h3>
 
           <p>
             Now we can start a quest, but we can't finish it yet, because we can't update objectives. In order to do
             this, we need to send out <em>events</em> every time an objective should update. This can be done by
-            having your relevant game class(es) implement the <code>EventDispatcher</code> class, and call the
-            <code>Notify()</code> function, giving the appropriate event as an argument. My main game class implements
-            the <code>EventDispatcher</code> interface: <code>class Game : public Bequestor::EventDispatcher</code>.
-            For preset objectives, there are functions available to create events under the <code>ObjectiveEvent</code>
-            class. <code>MakeNPCEvent()</code> takes the id of the NPC that's interacted with, similar to
-            <code>MakeLocationEvent()</code>. <code>MakeItemEvent()</code> takes the item id and the amount of items
-            collected, similar to <code>MakeKillCreatureEvent()</code>. This is how I send events in my own game class:
+            having your relevant game class(es) implement the <code class="hljs">EventDispatcher</code> class, and call
+            the
+            <code class="hljs">Notify()</code> function, giving the appropriate event as an argument. My main game class
+            implements
+            the <code class="hljs">EventDispatcher</code> interface: <code
+              class="hljs">class Game : public Bequestor::EventDispatcher</code>.
+            For preset objectives, there are functions available to create events under the <code
+              class="hljs">ObjectiveEvent</code>
+            class. <code class="hljs">MakeNPCEvent()</code> takes the id of the NPC that's interacted with, similar to
+            <code class="hljs">MakeLocationEvent()</code>. <code class="hljs">MakeItemEvent()</code> takes the item id
+            and the amount of items
+            collected, similar to <code class="hljs">MakeKillCreatureEvent()</code>. This is how I send events in my own
+            game class:
           </p>
 
-          <pre>
-void Game::interactWithNPC(Actor const& npcActor, Actor const& interactingActor)
+          <pre><code>void Game::interactWithNPC(Actor const& npcActor, Actor const& interactingActor)
 {
   Notify(Bequestor::ObjectiveEvent::MakeNPCEvent(npcActor.name));
   // (...)
-}</pre>
+}</code></pre>
 
-          <pre>
-void Game::killEnemy(/*(...)*/ Actor const& enemyActor, Actor const& killerActor, Player& player)
+          <pre><code>void Game::killEnemy(/*(...)*/ Actor const& enemyActor, Actor const& killerActor, Player& player)
 {
   Notify(Bequestor::ObjectiveEvent::MakeKillCreatureEvent(enemyActor.name, 1u));
   // (...)
-}</pre>
+}</code></pre>
 
           <p>
-            Finally, we need to add our <code>QuestManager</code> as an observer to our <code>EventDispatcher</code>, so
+            Finally, we need to add our <code class="hljs">QuestManager</code> as an observer to our <code
+              class="hljs">EventDispatcher</code>, so
             our events are actually handled and the objectives are updated. I simply do this in my game's quest system's
             constructor:
           </p>
 
-          <pre>
-QuestSystem::QuestSystem(EventDispatcher& dispatcher)
+          <pre><code>QuestSystem::QuestSystem(EventDispatcher& dispatcher)
 {
   // (...)
   dispatcher.AddObserver(questManager);
-}</pre>
+}</code></pre>
 
           <p>
             In the demo game, I've started the quest by entering the cave. In the first image the player has not yet
@@ -374,39 +377,48 @@ QuestSystem::QuestSystem(EventDispatcher& dispatcher)
             alt="A screenshot of the game where the player in in the cave area having just killed a bat (indicated in the command line). The quest log is empty again.">
 
           <h4 class="collapsible">Under the hood</h4>
+          <div class="collapsible_content">
+            <p>TODO</p>
+          </div>
 
-          <p>TODO</p>
+          <h2 class="collapsible">Advanced Features</h2>
+          <div class="collapsible_content">
+            <h3>Custom parameters</h3>
+            <p>
+              Only being able to create prerequisites or objectives of 4 preset types can be very limiting. Any specific
+              game would have unique kinds of prerequisites and objectives that need to be specified. The Quest Creator
+              tool allows for this through custom types and parameters. Let's open the tool, import our
+              <code class="hljs">batman_quests.json</code>, and update it to use custom prerequisites and objectives.
+              I'll remove the
+              second "Kill Creatures" objective, and replace it with a custom objective. We name the custom type "Do
+              Nothing" (to become Batman, one must be patient). Now we can add any number of custom parameters. For each
+              of these parameters we can specify a type, name, and value. Let's add a float named "seconds" and give it
+              a
+              value of <code class="hljs">5.0</code>. We must do nothing for 5 seconds. Let's also add a custom
+              prerequisite. To
+              start
+              the quest, we can't have walked more than 10 steps. Let's export it again, and overwrite the
+              <code class="hljs">batman_quests.json</code> file.
+            </p>
 
-          <h2>Advanced features</h2>
-          <h3>Custom parameters</h3>
-          <p>
-            Only being able to create prerequisites or objectives of 4 preset types can be very limiting. Any specific
-            game would have unique kinds of prerequisites and objectives that need to be specified. The Quest Creator
-            tool allows for this through custom types and parameters. Let's open the tool, import our
-            <code>batman_quests.json</code>, and update it to use custom prerequisites and objectives. I'll remove the
-            second "Kill Creatures" objective, and replace it with a custom objective. We name the custom type "Do
-            Nothing" (to become Batman, one must be patient). Now we can add any number of custom parameters. For each
-            of these parameters we can specify a type, name, and value. Let's add a float named "seconds" and give it a
-            value of <code>5.0</code>. We must do nothing for 5 seconds. Let's also add a custom prerequisite. To start
-            the quest, we can't have walked more than 10 steps. Let's export it again, and overwrite the
-            <code>batman_quests.json</code> file.
-          </p>
+            <img src="images/blog/quest_creator_custom_objective.png"
+              alt="Quest creation window showing the objectives, among which a custom objective with a custom &quot;Do Nothing&quot; type and a &quot;seconds&quot; float parameter set to 5.0.">
+            <img src="images/blog/quest_creator_custom_prerequisite.png"
+              alt="Quest creation window showing the prerequisites, among which a custom prerequisite with a custom &quot;Walked At Most&quot; type and a &quot;steps&quot; integer parameter set to 10.">
 
-          <img src="images/blog/quest_creator_custom_objective.png"
-            alt="Quest creation window showing the objectives, among which a custom objective with a custom &quot;Do Nothing&quot; type and a &quot;seconds&quot; float parameter set to 5.0.">
-          <img src="images/blog/quest_creator_custom_prerequisite.png"
-            alt="Quest creation window showing the prerequisites, among which a custom prerequisite with a custom &quot;Walked At Most&quot; type and a &quot;steps&quot; integer parameter set to 10.">
+            <p>
+              In order to use these custom prerequisites and objectives in our own game implementation, we'll need to
+              create our own <code class="hljs">PrerequisiteChecker</code> and <code
+                class="hljs">ObjectiveChecker</code>. Let's start with the
+              <code class="hljs">PrerequisiteChecker</code>. Implementing the <code
+                class="hljs">PrerequisiteChecker</code> interface requires us
+              to
+              implement the <code class="hljs">IsSatisfied()</code> function. We'll make our own
+              <code class="hljs">MaxDistanceWalkedChecker</code>
+              as follows:
+            </p>
 
-          <p>
-            In order to use these custom prerequisites and objectives in our own game implementation, we'll need to
-            create our own <code>PrerequisiteChecker</code> and <code>ObjectiveChecker</code>. Let's start with the
-            <code>PrerequisiteChecker</code>. Implementing the <code>PrerequisiteChecker</code> interface requires us to
-            implement the <code>IsSatisfied()</code> function. We'll make our own <code>MaxDistanceWalkedChecker</code>
-            as follows:
-          </p>
-
-          <pre>
-class MaxDistanceWalkedChecker : public Bequestor::PrerequisiteChecker
+            <pre><code>class MaxDistanceWalkedChecker : public Bequestor::PrerequisiteChecker
 {
 public:
   inline MaxDistanceWalkedChecker(int const& distanceWalked) : distanceWalked(distanceWalked) {}
@@ -415,65 +427,72 @@ public:
 
 private:
   int const& distanceWalked;
-};</pre>
+};</code></pre>
 
-          <p>
-            When implementing the <code>IsSatisfied()</code> function, we can get the values of our custom variables
-            through the templated <code>Prerequisite::Get()</code> function. In this case, we get an integer for the
-            specified "steps" parameter.
-          </p>
+            <p>
+              When implementing the <code class="hljs">IsSatisfied()</code> function, we can get the values of our
+              custom variables
+              through the templated <code class="hljs">Prerequisite::Get()</code> function. In this case, we get an
+              integer for the
+              specified "steps" parameter.
+            </p>
 
-          <pre>
-bool MaxDistanceWalkedChecker::IsSatisfied(Bequestor::Prerequisite const& prereq) const
+            <pre><code>bool MaxDistanceWalkedChecker::IsSatisfied(Bequestor::Prerequisite const& prereq) const
 {
 return distanceWalked &lt; prereq.Get&lt;int>("steps");
-} </pre>
+}</code></pre>
 
-          <p>
-            Prerequisites don't keep track of their own state, so instead we provide a reference to a variable in game
-            and save it in a member variable.
-          </p>
+            <p>
+              Prerequisites don't keep track of their own state, so instead we provide a reference to a variable in game
+              and save it in a member variable.
+            </p>
 
-          <p>
-            Now we just need to register this checker to our <code>QuestManager</code>. For this we can use the
-            <code>WithCustomPrerequisiteChecker()</code> function, which takes a string for the name of the checker
-            (this needs to be equal to the custom type name specified in the quest creator), and a shared pointer to
-            your <code>PrerequisiteChecker</code>. We can register the checker as follows (where the
-            <code>distanceWalked</code> variable is a context variable known by my game):
-          </p>
+            <p>
+              Now we just need to register this checker to our <code class="hljs">QuestManager</code>. For this we can
+              use the
+              <code class="hljs">WithCustomPrerequisiteChecker()</code> function, which takes a string for the name of
+              the checker
+              (this needs to be equal to the custom type name specified in the quest creator), and a shared pointer to
+              your <code class="hljs">PrerequisiteChecker</code>. We can register the checker as follows (where the
+              <code class="hljs">distanceWalked</code> variable is a context variable known by my game):
+            </p>
 
-          <pre>
-questManager = make_shared&lt;QuestManager>(
+            <pre><code>questManager = make_shared&lt;QuestManager>(
   QuestManager()
     /*(with preset checkers)*/
     .WithCustomPrerequisiteChecker("Walked At Most", make_shared&lt;MaxDistanceWalkedChecker>(distanceWalked))
-);</pre>
+);</code></pre>
 
-          <p>
-            In the demo game, you can see from the two images below that now the quest only shows up in the quest log if
-            the player hasn't walked more than 10 steps.
-          </p>
+            <p>
+              In the demo game, you can see from the two images below that now the quest only shows up in the quest log
+              if
+              the player hasn't walked more than 10 steps.
+            </p>
 
-          <img src="images/blog/quest_custom_prereq_met.png"
-            alt="A screenshot of the game where the player in in the cave area and the quest has shown up and is showing the three prerequisites. The console shows the player has walked less than 8 steps.">
-          <img src="images/blog/quest_custom_prereq_not_met.png"
-            alt="A screenshot of the game where the player in in the cave area and the quest has not shown up. The console shows the player has walked more than 8 steps.">
+            <img src="images/blog/quest_custom_prereq_met.png"
+              alt="A screenshot of the game where the player in in the cave area and the quest has shown up and is showing the three prerequisites. The console shows the player has walked less than 8 steps.">
+            <img src="images/blog/quest_custom_prereq_not_met.png"
+              alt="A screenshot of the game where the player in in the cave area and the quest has not shown up. The console shows the player has walked more than 8 steps.">
 
-          <p>
-            Now we do still have the problem that as soon as the quest starts, we are spammed with the following console
-            messages:
-          </p>
-          <img src="images/blog/no_objective_checker_exists.png"
-            alt="A screenshot of the console log with numerous error messages stating &quot;No objective checker for Do Nothing&quot;.">
+            <p>
+              Now we do still have the problem that as soon as the quest starts, we are spammed with the following
+              console
+              messages:
+            </p>
+            <img src="images/blog/no_objective_checker_exists.png"
+              alt="A screenshot of the console log with numerous error messages stating &quot;No objective checker for Do Nothing&quot;.">
 
-          <p>
-            It appears we need to create a custom <code>ObjectiveChecker</code>, too. When implementing the
-            <code>ObjectiveChecker</code> interface, we need to implement both the <code>OnEvent()</code> and
-            <code>IsSatisfied()</code> functions. To accurately measure time, I'm also keeping track of some variables
-            using <code>std::chrono</code>.
-          </p>
+            <p>
+              It appears we need to create a custom <code class="hljs">ObjectiveChecker</code>, too. When implementing
+              the
+              <code class="hljs">ObjectiveChecker</code> interface, we need to implement both the <code
+                class="hljs">OnEvent()</code> and
+              <code class="hljs">IsSatisfied()</code> functions. To accurately measure time, I'm also keeping track of
+              some variables
+              using <code class="hljs">std::chrono</code>.
+            </p>
 
-          <pre>
+            <pre><code>
 class DoNothingObjectiveChecker : public Bequestor::ObjectiveChecker
 {
 public:
@@ -486,46 +505,48 @@ private:
   bool started = false;
   std::chrono::high_resolution_clock::time_point lastTime;
   float secondsPassed = 0.0f;
-};</pre>
+};</code></pre>
 
-          <p>
-            Before implementing these functions, let's see what kind of events we will be sending. We want the time to
-            continuously update when the player does nothing, but to reset if the player does something. Let's
-            distinguish between doing something or nothing with an event parameter. When we do nothing on a frame, we
-            send an event as follows:
-          </p>
+            <p>
+              Before implementing these functions, let's see what kind of events we will be sending. We want the time to
+              continuously update when the player does nothing, but to reset if the player does something. Let's
+              distinguish between doing something or nothing with an event parameter. When we do nothing on a frame, we
+              send an event as follows:
+            </p>
 
-          <pre>
-void Game::Update(float dt)
+            <pre><code>void Game::Update(float dt)
 {
   Bequestor::ObjectiveEvent didNothingEvent = Bequestor::ObjectiveEvent("Do Nothing");
   didNothingEvent.AddParameter("Did Something", false);
   Notify(didNothingEvent);
-}</pre>
+}</code></pre>
 
-          <p>
-            "Do Nothing" is simply the objective type name. We specify this so the quest manager can find the attached
-            <code>ObjectiveChecker</code>. We also attach a boolean parameter that we give the name "Did Something". We
-            send an event with a different value for this boolean whenever the player moves or interact.
-          </p>
+            <p>
+              "Do Nothing" is simply the objective type name. We specify this so the quest manager can find the attached
+              <code class="hljs">ObjectiveChecker</code>. We also attach a boolean parameter that we give the name "Did
+              Something".
+              We
+              send an event with a different value for this boolean whenever the player moves or interact.
+            </p>
 
-          <pre>
-void Game::handleKeyboardInput()
+            <pre><code>void Game::handleKeyboardInput()
 { // (if the player moves or interacts:)
   Bequestor::ObjectiveEvent didNothingEvent = Bequestor::ObjectiveEvent("Do Nothing");
   didNothingEvent.AddParameter("Did Something", true);
   Notify(didNothingEvent);
-}</pre>
+}</code></pre>
 
-          <p>
-            Now we can handle this event in our <code>DoNothingObjectiveChecker::OnEvent()</code> function. We use the
-            <code>started</code> boolean just so the timer starts running when the first event is caught. We also set an
-            objective state variable, named "seconds". We will have to make sure to register this variable later.
-            Finally, I'm using the <code>std::chrono</code> namespace.
-          </p>
+            <p>
+              Now we can handle this event in our <code class="hljs">DoNothingObjectiveChecker::OnEvent()</code>
+              function. We use the
+              <code class="hljs">started</code> boolean just so the timer starts running when the first event is caught.
+              We also set
+              an
+              objective state variable, named "seconds". We will have to make sure to register this variable later.
+              Finally, I'm using the <code class="hljs">std::chrono</code> namespace.
+            </p>
 
-          <pre>
-void DoNothingObjectiveChecker::OnEvent(Objective const& objective, ObjectiveEvent const& event)
+            <pre><code>void DoNothingObjectiveChecker::OnEvent(Objective const& objective, ObjectiveEvent const& event)
 {
   if (!started || event.Get&lt;bool>("Did Something"))
   {
@@ -538,32 +559,40 @@ void DoNothingObjectiveChecker::OnEvent(Objective const& objective, ObjectiveEve
     float secondsPassedSinceLastEvent = duration&lt;float>(high_resolution_clock::now() - lastTime).count();
     objective.state->Set("seconds", secondsPassedSinceLastEvent);
   }
-}</pre>
+}</code></pre>
 
-          <p>
-            We also have to implement the <code>IsSatisfied()</code> function, where we simply compare our state
-            variable to the "seconds" specified in the quest creator (5, in our case):
-          </p>
+            <p>
+              We also have to implement the <code class="hljs">IsSatisfied()</code> function, where we simply compare
+              our state
+              variable to the "seconds" specified in the quest creator (5, in our case):
+            </p>
 
-          <pre>
+            <pre class="hljs">
 bool DoNothingObjectiveChecker::IsSatisfied(Objective const& objective) const
 {
   return objective.state->Get&lt;float>("seconds") >= objective.Get&lt;float>("seconds");
 }</pre>
 
-          <p>
-            Finally, we register our custom <code>ObjectiveChecker</code> to our <code>QuestManager</code> analogous to
-            how we did it for the custom <code>PrerequisiteChecker</code>, by using the
-            <code>QuestManager::WithCustomObjectiveChecker</code> function, which again takes a string referring to the
-            custom type name, and a shared pointer to this time an <code>ObjectiveChecker</code>, but there is one more
-            optional parameter for state parameters and their staring values. We can name these parameters anything we
-            want, and the type is automatically inferred. We simply name it the same as our objective parameter,
-            "seconds", with a starting value of 0.0f (indicating it's a float). This is the state variable we were
-            updating in our <code>DoNothingObjectiveChecker::OnEvent()</code> function. Below is the code used to
-            register our custom <code>ObjectiveChecker</code>.
-          </p>
+            <p>
+              Finally, we register our custom <code class="hljs">ObjectiveChecker</code> to our <code
+                class="hljs">QuestManager</code> analogous
+              to
+              how we did it for the custom <code class="hljs">PrerequisiteChecker</code>, by using the
+              <code class="hljs">QuestManager::WithCustomObjectiveChecker</code> function, which again takes a string
+              referring to
+              the
+              custom type name, and a shared pointer to this time an <code class="hljs">ObjectiveChecker</code>, but
+              there is one
+              more
+              optional parameter for state parameters and their staring values. We can name these parameters anything we
+              want, and the type is automatically inferred. We simply name it the same as our objective parameter,
+              "seconds", with a starting value of 0.0f (indicating it's a float). This is the state variable we were
+              updating in our <code class="hljs">DoNothingObjectiveChecker::OnEvent()</code> function. Below is the code
+              used to
+              register our custom <code class="hljs">ObjectiveChecker</code>.
+            </p>
 
-          <pre>
+            <pre class="hljs">
 questManager = make_shared&lt;QuestManager>(
   QuestManager()
   /*(with preset checkers and custom prerequisite checker)*/
@@ -571,75 +600,82 @@ questManager = make_shared&lt;QuestManager>(
 );
 </pre>
 
-          <p>
-            Below is a screenshot of my demo game showing the custom objective in progress.
-          </p>
+            <p>
+              Below is a screenshot of my demo game showing the custom objective in progress.
+            </p>
 
-          <img src="images/blog/quest_custom_objective.png"
-            alt="A screenshot of the game where the player in in the cave area and the quest is shown with the custom &quot;Do Nothing&quot; objective in progress.">
+            <img src="images/blog/quest_custom_objective.png"
+              alt="A screenshot of the game where the player in in the cave area and the quest is shown with the custom &quot;Do Nothing&quot; objective in progress.">
 
-          <h4 class="collapsible">Under the hood</h4>
-          <p>
-            TODO
-          </p>
+            <h4 class="collapsible">Under the hood</h4>
+            <div class="collapsible_content">
+              <p>
+                TODO
+              </p>
+            </div>
 
-          <h3>Objective dependencies</h3>
+            <h3>Objective dependencies</h3>
 
-          <p>
-            What if we want objectives that depend on one another, or that can branch, have multiple ways of completion?
-            For this we can use objective dependencies. Let's say to complete the quest, the plyer either has to wait 5
-            seconds, or they have to talk to Alfred and kill a bat. Either way they have to travel outside of the cave
-            to the grassy area to complete the quest.
-          </p>
+            <p>
+              What if we want objectives that depend on one another, or that can branch, have multiple ways of
+              completion?
+              For this we can use objective dependencies. Let's say to complete the quest, the plyer either has to wait
+              5
+              seconds, or they have to talk to Alfred and kill a bat. Either way they have to travel outside of the cave
+              to the grassy area to complete the quest.
+            </p>
 
-          <p>
-            We open back up the quest in the quest creator. We add objectives for killing a bat, and reaching the grass
-            area. Different dependencies represent branches; the current objective can only be started if either of
-            these dependencies is complete. Within a dependency, we can specify multiple objectives that <em>all</em>
-            need be complete for the entire dependency to be complete. So, for the "Travel Place" quest, we
-            press the little "+/-" icon to add or remove objectives to our first dependency, and we add the "Do Nothing"
-            objective. Then we add a new dependency, press the "+/-" icon for that dependency, and add both the "Talk to
-            Alfred" and "Kill a bat" objectives. The numbers behind the objective correspond to its ID; make sure you
-            pick the right ones. Finally, we need to mark all objectives <em>but</em> the "Travel Place" objective as
-            "optional", otherwise the quest will not be marked as complete until all objectives are complete, regardless
-            of their individual dependencies. We export once again as <code>batman_quests.json</code>
-          </p>
+            <p>
+              We open back up the quest in the quest creator. We add objectives for killing a bat, and reaching the
+              grass
+              area. Different dependencies represent branches; the current objective can only be started if either of
+              these dependencies is complete. Within a dependency, we can specify multiple objectives that <em>all</em>
+              need be complete for the entire dependency to be complete. So, for the "Travel Place" quest, we
+              press the little "+/-" icon to add or remove objectives to our first dependency, and we add the "Do
+              Nothing"
+              objective. Then we add a new dependency, press the "+/-" icon for that dependency, and add both the "Talk
+              to
+              Alfred" and "Kill a bat" objectives. The numbers behind the objective correspond to its ID; make sure you
+              pick the right ones. Finally, we need to mark all objectives <em>but</em> the "Travel Place" objective as
+              "optional", otherwise the quest will not be marked as complete until all objectives are complete,
+              regardless
+              of their individual dependencies. We export once again as <code class="hljs">batman_quests.json</code>
+            </p>
 
-          <img src="images/blog/quest_creator_dependent_objectives_1.png"
-            alt="Quest creation window showing the newly created objectives.">
-          <img src="images/blog/quest_creator_dependent_objectives_2.png"
-            alt="Quest creation window showing the 2 objectives marked as optional, and the final objective with dependencies on the other objectives.">
+            <img src="images/blog/quest_creator_dependent_objectives_1.png"
+              alt="Quest creation window showing the newly created objectives.">
+            <img src="images/blog/quest_creator_dependent_objectives_2.png"
+              alt="Quest creation window showing the 2 objectives marked as optional, and the final objective with dependencies on the other objectives.">
 
-          <h4 class="collapsible">Under the hood</h4>
+            <p>
+              With these new objectives, we need to make sure we actually send events when we travel to a place, but
+              other
+              than that, we won't have to change anything in the demo game.
+            </p>
 
-          <p>
-            With these new objectives, we need to make sure we actually send events when we travel to a place, but other
-            than that, we won't have to change anything in the demo game.
-          </p>
-
-          <pre>
+            <pre class="hljs">
 void Game::handleAreaUpdates()
 {
   // (...)
   Notify(Bequestor::ObjectiveEvent::MakeLocationEvent(area.name));
   // (...)
 }</pre>
-          <p>
-            In the demo game, you can see as long as the player hasn't done nothing for 5 seconds and also hasn't both
-            talked to Alfred and killed a bat, the "Travel Place" objective displays a "DEPENDENCIES NOT MET" message.
-            Otherwise, the "Travel Place" objective <em>is</em> active, and the quest will complete upon entering the
-            grass.
-          </p>
+            <p>
+              In the demo game, you can see as long as the player hasn't done nothing for 5 seconds and also hasn't both
+              talked to Alfred and killed a bat, the "Travel Place" objective displays a "DEPENDENCIES NOT MET" message.
+              Otherwise, the "Travel Place" objective <em>is</em> active, and the quest will complete upon entering the
+              grass.
+            </p>
 
-          <img src="images/blog/quest_objective_dependencies_not_met.png"
-            alt="A screenshot of the game where the player in in the cave area and the quest is shown with all objective shown, but none completed, so the &quot;Travel Place&quot; objective shows &quot;DEPENDENCIES NOT MET&quot;.">
-          <img src="images/blog/quest_objective_dependencies_met_1.png"
-            alt="A screenshot of the game where the player in in the cave area and the quest is shown with all objective shown, and the &quot;Do Nothing&quot; objective completed so the &quot;Travel Place&quot; objective is active.">
-          <img src="images/blog/quest_objective_dependencies_met_2.png"
-            alt="A screenshot of the game where the player in in the cave area and the quest is shown with all objective shown, and the &quot;Talk To NPC&quot; and &quot;Kill Creature&quot; objectives completed so the &quot;Travel Place&quot; objective is active.">
-          <img src="images/blog/quest_objective_dependencies_met_2.png"
-            alt="A screenshot of the game where the player in in the grass area and the quest window is empty again.">
-
+            <img src="images/blog/quest_objective_dependencies_not_met.png"
+              alt="A screenshot of the game where the player in in the cave area and the quest is shown with all objective shown, but none completed, so the &quot;Travel Place&quot; objective shows &quot;DEPENDENCIES NOT MET&quot;.">
+            <img src="images/blog/quest_objective_dependencies_met_1.png"
+              alt="A screenshot of the game where the player in in the cave area and the quest is shown with all objective shown, and the &quot;Do Nothing&quot; objective completed so the &quot;Travel Place&quot; objective is active.">
+            <img src="images/blog/quest_objective_dependencies_met_2.png"
+              alt="A screenshot of the game where the player in in the cave area and the quest is shown with all objective shown, and the &quot;Talk To NPC&quot; and &quot;Kill Creature&quot; objectives completed so the &quot;Travel Place&quot; objective is active.">
+            <img src="images/blog/quest_objective_dependencies_complete.png"
+              alt="A screenshot of the game where the player in in the grass area and the quest window is empty again.">
+          </div>
           <h2>Conclusion</h2>
           <p>
             In what essentially has been the user guide for <em>Bequestor</em>, we have gone over all the features that
@@ -651,9 +687,11 @@ void Game::handleAreaUpdates()
           </p>
 
           <h4 class="collapsible">Under the hood</h4>
-          <p>
-            TODO
-          </p>
+          <div class="collapsible_content">
+            <p>
+              TODO
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -663,6 +701,8 @@ void Game::handleAreaUpdates()
     ================================================== -->
   <script src="js/plugins.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 
 </body>
 
