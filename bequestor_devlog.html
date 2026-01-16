@@ -806,9 +806,10 @@ return quests;
               specific checkers, such as the <code class="hljs">IdAmountPrereqChecker</code> class. This takes a <code
                 class="hljs">std::function&lt;unsigned int(std::string const&)> idAmountQuery</code> and is used for
               the
-              item <code class="hljs">PrerequisiteChecker</code>. Below is the <code class="hljs">IsSatisfied()</code>
-              implementation. The templated <code class="hljs">Get()</code> function will be explained in the advanced
-              section.
+              item <code class="hljs">PrerequisiteChecker</code>. The other preset <code
+                class="hljs">PrerequisiteCheckers</code>s work similarly. Below is the <code
+                class="hljs">IsSatisfied()</code> implementation. The templated <code class="hljs">Get()</code> function
+              will be explained in the section on custom parameters.
             </p>
 
             <pre><code>bool IdAmountPrereqChecker::IsSatisfied(Prerequisite const& prereq) const
@@ -823,14 +824,14 @@ return quests;
               The <code class="hljs">QuestManager</code> keeps track of a hashmap of each of its <code
                 class="hljs">PrerequisiteChecker</code>s: <code
                 class="hljs">std::unordered_map&lt;std::string, std::shared_ptr&lt;PrerequisiteChecker>> prereqCheckers;</code>.
-              When the <code class="hljs">QuestManager::WithItemChecker()</code> is called, a new <code
+              When the <code class="hljs">QuestManager::WithItemChecker()</code> function is called, a new <code
                 class="hljs">IdAmountPrereqChecker</code> is
               created with the function provided, and an entry is added to the hashmap for the string "Has Items".
               Then
               on <code class="hljs">Update()</code>, for each of the inactive quests' prerequisites, based on the type
               (converted to a string), the
               the <code class="hljs">PrerequisiteChecker</code> is found in the hashmap, and its <code
-                class="hljs">IsSatisfied()</code> function is executed.
+                class="hljs">IsSatisfied()</code> function is executed (see the code under the Custom Checkers section).
             </p>
 
             <h3>Event System Implementation</h3>
@@ -851,8 +852,7 @@ return quests;
             </p>
             <pre><code>QuestManager::QuestManager()
 {
-//(...)
-
+  //(...)
   objectiveCheckers.insert({OBJECTIVE_TYPE_TO_STRING.find(ObjectiveType::ITEM)->second, make_shared&lt;IdAmountObjectiveChecker>()});
   objectiveCheckers.insert({OBJECTIVE_TYPE_TO_STRING.find(ObjectiveType::CREATURE_KILL)->second, make_shared&lt;IdAmountObjectiveChecker>()});
   objectiveCheckers.insert({OBJECTIVE_TYPE_TO_STRING.find(ObjectiveType::LOCATION)->second, make_shared&lt;IdObjectiveChecker>()});
@@ -869,8 +869,8 @@ return quests;
 
             <h3>Custom Parameters</h3>
             <p>
-              Under the hood, for objects with custom parameters, we use a <code class="hljs">Parameterized</code>
-              class. In here we simply keep track of a hashmap which maps from the paramater name to its value. Its
+              Under the hood, for objects with custom parameters, I use a <code class="hljs">Parameterized</code>
+              class. In here, I simply keep track of a hashmap which maps from the paramater name to its value. Its
               value is stored as an <code class="hljs">std::variant</code>, and a templated <code
                 class="hljs">Get()</code> function is used to retrieve the value of the correct type. <code
                 class="hljs">Prerequisite</code>s as well as <code class="hljs">Objective</code>s extend this
@@ -996,7 +996,9 @@ private:
             can be preset ones or fully custom ones, and with possible optional objectives and dependencies between
             objectives. We have then exported these quests to a JSON, and imported them into our own game, using the
             <em>Bequestor</em> library. We also registered the necessary prerequisite and objective checkers, and
-            parameters, and sent out the appropriate events so our quests update accordingly.
+            parameters, and sent out the appropriate events so our quests update accordingly. Lastly, there was a
+            section where we explored how I implemented this quest system under the hood. Hopefully, this all
+            helps you to use this tool properly, and/or create your own quest tool.
           </p>
 
           <h2 id="q_references">References</h2>
