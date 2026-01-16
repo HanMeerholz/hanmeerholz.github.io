@@ -121,9 +121,19 @@
 
           <p>
             To answer this, I have created my own quest design tool and quest system C++ library, <em>Bequestor</em>.
-            In this blog post, I will show how to use this tool for yourself, and for those more technically inclined
-            and
-            interested, there are additional sections on implementation details.
+            In this blog post, I will show how to use this tool for yourself.
+          </p>
+
+          <p>
+            In the <a href="#q_setup">setup</a> section, I discuss how to set up the Quest Creator and Bequestor
+            library. Then, in the <a href="#q_create_quest">Create Quest</a> section, we use the Quest Creator to create
+            a simple quest. In the <a href="#q_implement_quest">Implement Quest</a> section, we go over how to use the
+            Bequestor library to import and use the created quest. There is also a section on creating and using <a
+              href="#q_advanced">more advanced quests</a> that have custom prerequisites and objectives with
+            dependencies, and for those more technically inclined and interested, there is an additional <a
+              href="#q_under_the_hood">Under the Hood</a> section that goes over the implementation details of
+            the <em>Bequestor</em> library. Finally, there is a <a href="#q_conclusion">conclusion</a> and <a
+              href="#q_references">references</a>.
           </p>
 
           <div class="column">
@@ -134,7 +144,7 @@
             <img src="images/blog/quest_sample_game.png" alt="Quest game window showing quest progression.">
           </div>
 
-          <h2>Setup</h2>
+          <h2 id="q_setup">Setup</h2>
 
           <p>
             This tool consists of two parts: the <em>Quest Creator</em>, a quest creation tool written in Python in
@@ -172,10 +182,16 @@ python quest_creation_tool.py</code></pre>
 
           <h3>Bequestor Library</h3>
           <p>
-            TODO figure this out
+            At this time, the library is simply a visual studio project. Download the files, add <code
+              class="hljs">code/bequestor/src</code> to your additional include directories, and from your own VS
+            project, add a reference to the bequestor project.
           </p>
 
-          <h2>Creating a simple quest</h2>
+          <p>
+            (This section will be expanded upon later)
+          </p>
+
+          <h2 id="q_create_quest">Creating a simple quest</h2>
 
           <h3>Basic information</h3>
 
@@ -226,7 +242,7 @@ python quest_creation_tool.py</code></pre>
           <img src="images/blog/quest_creator_export_quest.png"
             alt="Save dialogue. The quest is being saved as &quot;batman_quests.json&quot;.">
 
-          <h2>Registering your quests to your game</h2>
+          <h2 id="q_implement_quest">Registering your quests to your game</h2>
 
           <p>
             In order to use the Bequestor library in your own game and use the quest you've just created, we first need
@@ -311,10 +327,6 @@ QuestManager()
           <img src="images/blog/quest_prereq_met.png"
             alt="A screenshot of the game where the player in in the cave area and the quest has shown up and is showing the two prerequisites.">
 
-          <h4 class="collapsible">Under the hood</h4>
-          <div class="collapsible_content">
-            <p>TODO</p>
-          </div>
           <h3>Dispatching events</h3>
 
           <p>
@@ -376,12 +388,7 @@ QuestManager()
           <img src="images/blog/quest_objectives_met.png"
             alt="A screenshot of the game where the player in in the cave area having just killed a bat (indicated in the command line). The quest log is empty again.">
 
-          <h4 class="collapsible">Under the hood</h4>
-          <div class="collapsible_content">
-            <p>TODO</p>
-          </div>
-
-          <h2 class="collapsible">Advanced Features</h2>
+          <h2 id="q_advanced" class="collapsible">Advanced Features</h2>
           <div class="collapsible_content">
             <h3>Custom parameters</h3>
             <p>
@@ -567,11 +574,10 @@ private:
               variable to the "seconds" specified in the quest creator (5, in our case):
             </p>
 
-            <pre class="hljs">
-bool DoNothingObjectiveChecker::IsSatisfied(Objective const& objective) const
+            <pre><code>bool DoNothingObjectiveChecker::IsSatisfied(Objective const& objective) const
 {
   return objective.state->Get&lt;float>("seconds") >= objective.Get&lt;float>("seconds");
-}</pre>
+}</code></pre>
 
             <p>
               Finally, we register our custom <code class="hljs">ObjectiveChecker</code> to our <code
@@ -592,13 +598,11 @@ bool DoNothingObjectiveChecker::IsSatisfied(Objective const& objective) const
               register our custom <code class="hljs">ObjectiveChecker</code>.
             </p>
 
-            <pre class="hljs">
-questManager = make_shared&lt;QuestManager>(
+            <pre><code>questManager = make_shared&lt;QuestManager>(
   QuestManager()
   /*(with preset checkers and custom prerequisite checker)*/
   .WithCustomObjectiveChecker("Do Nothing", make_shared&lt;DoNothingObjectiveChecker>(), {{"seconds", 0.0f}})
-);
-</pre>
+);</code></pre>
 
             <p>
               Below is a screenshot of my demo game showing the custom objective in progress.
@@ -607,22 +611,14 @@ questManager = make_shared&lt;QuestManager>(
             <img src="images/blog/quest_custom_objective.png"
               alt="A screenshot of the game where the player in in the cave area and the quest is shown with the custom &quot;Do Nothing&quot; objective in progress.">
 
-            <h4 class="collapsible">Under the hood</h4>
-            <div class="collapsible_content">
-              <p>
-                TODO
-              </p>
-            </div>
-
             <h3>Objective dependencies</h3>
 
             <p>
               What if we want objectives that depend on one another, or that can branch, have multiple ways of
               completion?
-              For this we can use objective dependencies. Let's say to complete the quest, the plyer either has to wait
-              5
-              seconds, or they have to talk to Alfred and kill a bat. Either way they have to travel outside of the cave
-              to the grassy area to complete the quest.
+              For this we can use objective dependencies. Let's say to complete the quest, the player either has to wait
+              5 seconds, or they have to talk to Alfred and kill a bat. Either way they have to travel outside of the
+              cave to the grassy area to complete the quest.
             </p>
 
             <p>
@@ -653,13 +649,13 @@ questManager = make_shared&lt;QuestManager>(
               than that, we won't have to change anything in the demo game.
             </p>
 
-            <pre class="hljs">
+            <pre><code>
 void Game::handleAreaUpdates()
 {
   // (...)
   Notify(Bequestor::ObjectiveEvent::MakeLocationEvent(area.name));
   // (...)
-}</pre>
+}</code></pre>
             <p>
               In the demo game, you can see as long as the player hasn't done nothing for 5 seconds and also hasn't both
               talked to Alfred and killed a bat, the "Travel Place" objective displays a "DEPENDENCIES NOT MET" message.
@@ -675,8 +671,245 @@ void Game::handleAreaUpdates()
               alt="A screenshot of the game where the player in in the cave area and the quest is shown with all objective shown, and the &quot;Talk To NPC&quot; and &quot;Kill Creature&quot; objectives completed so the &quot;Travel Place&quot; objective is active.">
             <img src="images/blog/quest_objective_dependencies_complete.png"
               alt="A screenshot of the game where the player in in the grass area and the quest window is empty again.">
+
           </div>
-          <h2>Conclusion</h2>
+
+          <h2 id="q_under_the_hood" class="collapsible">Under the Hood</h2>
+          <div class="collapsible_content">
+            <h3>Import</h3>
+
+            <p>
+              Under the hood, importing a quest is done using the <code class="hljs">nlohmann/json</code> library [1].
+              My JSON reader is mostly hardcoded based on the quest JSON structure. The conversion from string to enum
+              can easily be done using the <code class="hljs">NLOHMANN_JSON_SERIALIZE_ENUM</code> macro.
+            </p>
+
+            <pre><code>NLOHMANN_JSON_SERIALIZE_ENUM(QuestStatus,
+  {{QuestStatus::UNAVAILABLE, "Unavailable"},
+   {QuestStatus::CAN_START, "Can Start"},
+   {QuestStatus::STARTED, "Started"},
+   {QuestStatus::CAN_FINISH, "Can Finish"},
+   {QuestStatus::FINISHED, "Finished"},
+   {QuestStatus::CANCELLED, "Cancelled"}});</code></pre>
+
+            <p>
+              Reading in the JSON itself, in turn, is quite easy with the nlohmann library. Below is my <code
+                class="hljs">ReadQuests()</code> function implementation:
+            </p>
+
+            <pre><code>vector&lt;Quest> JsonReader::ReadQuests(string const& filepath /*...*/)
+{
+  vector&lt;Quest> quests = {};
+  ifstream f(filepath);
+
+  if (!f.is_open())
+  {
+    cerr &lt;&lt; "error opening file." &lt;&lt; endl;
+    return quests; 
+  }
+
+  json questsJson = json::parse(f);
+  for (json const& questJson : questsJson["quests"])
+  { 
+    Quest quest; quest.id = questJson["id"].get&lt;int>();
+    quest.name = questJson["name"];
+    quest.description = questJson["description"];
+    //(...)
+    quests.push_back(quest);
+    shared_ptr&lt;Quest> questPtr = make_shared&lt;Quest>(quest);
+  }
+
+return quests;
+};</code></pre>
+
+            <h3>PrerequisiteChecker Implementation</h3>
+
+            <p>
+              Under the hood, to keep track of different prerequisite checkers, I use a <em>Command Pattern</em> [2].
+              The base class <code class="hljs">PrerequisiteChecker</code> is an interface with a single virtual <code
+                class="hljs">IsSatisfied()</code> function that returns a boolean. This interface is implemented for
+              specific checkers, such as the <code class="hljs">IdAmountPrereqChecker</code> class. This takes a <code
+                class="hljs">std::function&lt;unsigned int(std::string const&)> idAmountQuery</code> and is used for the
+              item <code class="hljs">PrerequisiteChecker</code>. Below is the <code class="hljs">IsSatisfied()</code>
+              implementation. The templated <code class="hljs">Get()</code> function will be explained in the advanced
+              section.
+            </p>
+
+            <pre><code>bool IdAmountPrereqChecker::IsSatisfied(Prerequisite const& prereq) const
+{
+  unsigned int currentAmount = idAmountQuery(prereq.Get&lt;string>(string(PROP_PREREQ_ID)));
+  unsigned int targetAmount = static_cast&lt;unsigned int>(prereq.Get&lt;int>(string(PROP_PREREQ_AMOUNT)));
+
+  return currentAmount >= targetAmount;
+}</code></pre>
+
+            <p>
+              The <code class="hljs">QuestManager</code> keeps track of a hashmap of each of its <code
+                class="hljs">PrerequisiteChecker</code>s: <code
+                class="hljs">std::unordered_map&lt;std::string, std::shared_ptr&lt;PrerequisiteChecker>> prereqCheckers;</code>.
+              When the <code class="hljs">QuestManager::WithItemChecker()</code> is called, a new <code
+                class="hljs">IdAmountPrereqChecker</code> is
+              created with the function provided, and an entry is added to the hashmap for the string "Has Items". Then
+              on <code class="hljs">Update()</code>, for each of the inactive quests' prerequisites, based on the type
+              (converted to a string), the
+              the <code class="hljs">PrerequisiteChecker</code> is found in the hashmap, and its <code
+                class="hljs">IsSatisfied()</code> function is executed.
+            </p>
+
+            <h3>Event System Implementation</h3>
+            <p>
+              Under the hood, <em>Bequestor</em> uses an Observer pattern [3]. An <code
+                class="hljs">EventDispatcher</code> keeps track of a set of <code class="hljs">Observer</code>s and when
+              its <code class="hljs">Notify()</code> function is called, it
+              calls <code class="hljs">OnNotify()</code> on all of its <code class="hljs">Observer</code>s.
+            </p>
+            <p>
+              From that point on, it works similarly to prerequisites. <code class="hljs">QuestManager</code> saves a
+              hashmap of <code class="hljs">ObjectiveChecker</code>s: <code
+                class="hljs">std::unordered_map&lt;std::string, std::shared_ptr&lt;ObjectiveChecker>> objectiveCheckers;</code>.
+              For the preset objectives, since these don't require a specific query, these are already automatically
+              created
+              in the <code class="hljs">QuestManager</code>'s constructor.
+            </p>
+            <pre><code>QuestManager::QuestManager()
+{
+//(...)
+
+  objectiveCheckers.insert({OBJECTIVE_TYPE_TO_STRING.find(ObjectiveType::ITEM)->second, make_shared&lt;IdAmountObjectiveChecker>()});
+  objectiveCheckers.insert({OBJECTIVE_TYPE_TO_STRING.find(ObjectiveType::CREATURE_KILL)->second, make_shared&lt;IdAmountObjectiveChecker>()});
+  objectiveCheckers.insert({OBJECTIVE_TYPE_TO_STRING.find(ObjectiveType::LOCATION)->second, make_shared&lt;IdObjectiveChecker>()});
+  objectiveCheckers.insert({OBJECTIVE_TYPE_TO_STRING.find(ObjectiveType::NPC)->second, make_shared&lt;IdObjectiveChecker>()});
+}</code></pre>
+            <p>
+              In <code class="hljs">QuestManager::OnNotify()</code>, for each of the active quests' objectives, the
+              <code class="hljs">ObjectiveChecker</code> is found in the hashmap and its <code
+                class="hljs">OnEvent()</code>
+              function is executed, passing along the event parameter. Furthermore, in the <code
+                class="hljs">QuestManager::Update()</code> function, for each of the active quests' objectives, the
+              <code class="hljs">IsSatisfied()</code> function is executed.
+            </p>
+
+            <h3>Custom Parameters</h3>
+            <p>
+              Under the hood, for objects with custom parameters, we use a <code class="hljs">Parameterized</code>
+              class. In here we simply keep track of a hashmap which maps from the paramater name to its value. Its
+              value is stored as an <code class="hljs">std::variant</code>, and a templated <code
+                class="hljs">Get()</code> function is used to retrieve the value of the correct type. <code
+                class="hljs">Prerequisite</code>s as well as <code class="hljs">Objective</code>s extend this
+              <code class="hljs">Parameterized</code> class. Below is the <code class="hljs">Parameterized</code>
+              implementation:
+            </p>
+
+            <pre><code>class Parameterized
+{
+public:
+  void AddParameter(std::string name, std::variant&lt;std::string, int, unsigned int, float, bool> value)
+  {
+    parameters.insert({name, value});
+  };
+
+  template &lt;typename Type>
+  Type Get(std::string name) const
+  {
+    return std::get&lt;Type>(parameters.at(name));
+  };
+
+  // (...)
+
+private:
+  std::unordered_map&lt;std::string, std::variant&lt;std::string, int, unsigned int, float, bool>> parameters;
+};</code></pre>
+
+            <h3>Custom Checkers</h3>
+            <p>
+              In order to find the right <code class="hljs">PrerequisiteChecker</code> or <code
+                class="hljs">ObjectiveChecker</code> in the appropriate hashmap, each custom checker is saved under
+              its
+              prerequisite/objective's custom type name (where preset checkers simply map from their enum to their
+              index string). As an example of how this is used, see the <code
+                class="hljs">QuestManager::checkPrerequisitesForQuest()</code> implemenation:
+            </p>
+
+            <pre><code>bool QuestManager::checkPrerequisitesForQuest(Quest const& quest) const
+{
+  for (auto const& prereq : quest.prerequisites)
+  {
+    string const& prereqStr = prereq->type == PrerequisiteType::CUSTOM ? prereq->customType : PREREQ_TYPE_TO_STRING.find(prereq->type)->second;
+    auto const& result = prereqCheckers.find(prereqStr);
+    if (result == prereqCheckers.end())
+    {
+      cerr &lt;&lt; "No prerequisite checker for " &lt;&lt; prereqStr &lt;&lt; " exists." &lt;&lt; endl; 
+      return false; 
+    }
+    else if (!(result->second->IsSatisfied(*prereq))) return false;
+  }
+  return true;
+}</code></pre>
+
+            <h3>State Parameters</h3>
+
+            <p>
+              Custom objectives can also come with custom state parameters. These are registered along with the <code
+                class="hljs">ObjectiveChecker</code>. They are saved in a multimap in <code
+                class="hljs">QuestManager</code> that maps from the custom type to the parameters. These custom
+              parameters are then passed along to the <code class="hljs">JsonReader::ReadQuests</code> function. Only
+              in here are they actually added to the objective state as the objectives are read in.
+            </p>
+
+            <pre><code>vector&lt;shared_ptr&lt;Objective>> readObjectives(json objectivesJson,
+                unordered_multimap&lt;string, pair&lt;string, variant&lt;string, int, unsigned int, float, bool>>> const& extraParameters)
+{
+  vector&lt;shared_ptr&lt;Objective>> objectives;
+  for (json const& objectiveJson : objectivesJson)
+  {
+    shared_ptr&lt;Objective> objective = make_shared&lt;Objective>();
+    objective->type = objectiveJson["type"].get&lt;ObjectiveType>();
+    // (...)
+    readParameters(objectiveJson["parameters"], objective);
+
+    if (objective->type == ObjectiveType::CUSTOM)
+    {
+      objective->customType = objectiveJson["custom_type"];
+
+      auto its = extraParameters.equal_range(objective->customType);
+      for (auto& it = its.first; it != its.second; it++)
+      objective->state->AddParameter(it->second.first, it->second.second);
+    }
+
+    objectives.push_back(objective);
+  }
+  // (...)
+  return objectives;
+}</code></pre>
+
+            <h3>Dependencies</h3>
+            <p>
+              Under the hood, dependencies are stored as sets of sets of pointers to objectives: <code
+                class="hljs">std::set&lt;std::set&lt;std::shared_ptr&lt;Objective>>> dependencies;</code> For each of
+              the objectives, we set a status to <code class="hljs">UNAVAILABLE</code> at the start. Then for each of
+              the unavailable objectives, we execute <code
+                class="hljs">QuestManager::objectiveDependenciesAreMet()</code>, and if this returns <code
+                class="hljs">true</code>, we set the objective status to <code class="hljs">ACTIVE</code>. I can make
+              use of the <code class="hljs">std::all_of()</code> and <code class="hljs">std::any_of()</code>
+              algorithms to easily specify that the dependencies are met if for any of them, all of the associated
+              objectives are complete.
+            </p>
+
+            <pre><code>bool QuestManager::objectiveDependenciesAreMet(Objective const& objective, Quest const& quest) const
+{
+  return any_of(objective.dependencies.cbegin(),
+                objective.dependencies.cend(),
+                [&completedObjectives](set&lt;shared_ptr&lt;Objective>> const& dependency)
+                {
+                  return all_of(dependency.cbegin(),
+                                dependency.cend(),
+                                [](shared_ptr&lt;Objective> const& objective)
+                                { return objective->state->status == ObjectiveStatus::SATISFIED; });
+                });
+}</code></pre>
+          </div>
+
+          <h2 id="q_conclusion">Conclusion</h2>
           <p>
             In what essentially has been the user guide for <em>Bequestor</em>, we have gone over all the features that
             the current version of the tool has to offer. We have created quests with prerequisites and objectives that
@@ -686,12 +919,23 @@ void Game::handleAreaUpdates()
             parameters, and sent out the appropriate events so our quests update accordingly.
           </p>
 
-          <h4 class="collapsible">Under the hood</h4>
-          <div class="collapsible_content">
-            <p>
-              TODO
-            </p>
-          </div>
+          <h2 id="q_references">References</h2>
+          <table>
+            <tr>
+              <td>[1] <a href=https://github.com/nlohmann/json>https://github.com/nlohmann/json</a></td>
+            </tr>
+            <tr>
+              <td>[2] <a
+                  href=https://gameprogrammingpatterns.com/command.html>https://gameprogrammingpatterns.com/command.html</a>
+              </td>
+            </tr>
+            <tr>
+              <td>[3] <a
+                  href=https://gameprogrammingpatterns.com/observer.html>https://gameprogrammingpatterns.com/observer.html</a>
+              </td>
+            </tr>
+          </table>
+
         </div>
       </div>
     </section>

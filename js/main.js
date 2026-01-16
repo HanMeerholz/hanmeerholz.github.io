@@ -379,6 +379,8 @@
                     content.style.maxHeight = null;
                 } else {
                     content.style.maxHeight = content.scrollHeight + "px";
+                    var parentContent = content.closest(".collapsible_content")
+                    parentContent.style.maxHeight = parentContent.scrollHeight + "px";
                 }
             });
         }

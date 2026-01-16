@@ -4187,8 +4187,8 @@ img.u-pull-left {
 
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
-    background-color: var(--color-gray-17);
-    color: var(--color-gray-3);
+    background-color: var(--color-gray-16);
+    color: var(--color-gray-4);
     cursor: pointer;
     padding: 18px;
     width: 100%;
@@ -4205,7 +4205,7 @@ img.u-pull-left {
 /* Style the collapsible content. Note: hidden by default */
 .collapsible_content {
     padding: 0 18px;
-    background-color: var(--color-gray-17);
+    background-color: var(--color-gray-16);
     overflow: hidden;
     max-height: 0;
     transition: max-height 1.0s ease-out;
@@ -4221,7 +4221,6 @@ img.u-pull-left {
 
 .collapsible:after {
     content: '\2B9E';
-    /* Unicode character for "plus" sign (+) */
     font-size: 24px;
     color: white;
     float: right;
@@ -4230,5 +4229,4 @@ img.u-pull-left {
 
 .active:after {
     content: "\2B9F";
-    /* Unicode character for "minus" sign (-) */
 }
