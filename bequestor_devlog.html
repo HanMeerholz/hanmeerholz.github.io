@@ -103,6 +103,16 @@
         <div class="column lg-12">
           <h1>Bequestor: <br> A Versatile Quest System</h1>
 
+          <div class="images_container">
+            <div class="image_container">
+              <img src="images/blog/quest_creator_full_quest.png"
+                alt="Quest creation window with visible quest with multiple prerequisites and objectives, some of which are collapsed; the second objective has custom parameters and is dependent on the first.">
+            </div>
+            <div class="image_container">
+              <img src="images/blog/quest_sample_game.png" alt="Quest game window showing quest progression.">
+            </div>
+          </div>
+
           <h2>Introduction</h2>
 
           <p>
@@ -121,28 +131,20 @@
 
           <p>
             To answer this, I have created my own quest design tool and quest system C++ library, <em>Bequestor</em>.
-            In this blog post, I will show how to use this tool for yourself.
+            In this blog post, I will show how the tool works and how you could implement a similar tool for yourself.
           </p>
 
           <p>
             In the <a href="#q_setup">setup</a> section, I discuss how to set up the Quest Creator and Bequestor
-            library. Then, in the <a href="#q_create_quest">Create Quest</a> section, we use the Quest Creator to create
-            a simple quest. In the <a href="#q_implement_quest">Implement Quest</a> section, we go over how to use the
-            Bequestor library to import and use the created quest. There is also a section on creating and using <a
-              href="#q_advanced">more advanced quests</a> that have custom prerequisites and objectives with
+            library. Then, in the <a href="#q_create_quest">quest creation</a> section, we use the Quest Creator to
+            create a simple quest. In the <a href="#q_implement_quest">quest implementation</a> section, we go over how
+            to use the Bequestor library to import and use the created quest. There is also a section on creating and
+            using <a href="#q_advanced">more advanced quests</a> that have custom prerequisites and objectives with
             dependencies, and for those more technically inclined and interested, there is an additional <a
-              href="#q_under_the_hood">Under the Hood</a> section that goes over the implementation details of
+              href="#q_under_the_hood">under the hood</a> section that goes over the implementation details of
             the <em>Bequestor</em> library. Finally, there is a <a href="#q_conclusion">conclusion</a> and <a
               href="#q_references">references</a>.
           </p>
-
-          <div class="column">
-            <img src="images/blog/quest_creator_full_quest.png"
-              alt="Quest creation window with visible quest with multiple prerequisites and objectives, some of which are collapsed; the second objective has custom parameters and is dependent on the first.">
-          </div>
-          <div class="column">
-            <img src="images/blog/quest_sample_game.png" alt="Quest game window showing quest progression.">
-          </div>
 
           <h2 id="q_setup">Setup</h2>
 
@@ -199,8 +201,12 @@ python quest_creation_tool.py</code></pre>
             When opening the Quest Creator tool, you are greeted with the following screen:
           </p>
 
-          <img src="images/blog/quest_creator_startup.png"
-            alt="Quest creation window with buttons for &quot;Add Quest&quot;, &quot;Import&quot;, &quot;Export&quot;, and &quot;Quit&quot;.">
+          <div class="images_container">
+            <div class="image_container">
+              <img src="images/blog/quest_creator_startup.png"
+                alt="Quest creation window with buttons for &quot;Add Quest&quot;, &quot;Import&quot;, &quot;Export&quot;, and &quot;Quit&quot;.">
+            </div>
+          </div>
 
           <p>
             You can now press "Add Quest" to add a quest and give it a name and description. You can also collapse or
@@ -208,18 +214,13 @@ python quest_creation_tool.py</code></pre>
             recommended to give them different names.
           </p>
 
-          <h3>Prerequisites</h3>
+          <h3>Prerequisites & Objectives</h3>
 
           <p>
             For each quest, you can specify a number of prerequisites. If all of the prerequisites are met, the quest
             will start. There are 4 preset prerequisite types, and a custom type you can select. For now, let's focus
             on the presets and specify some prerequisites.
           </p>
-
-          <img src="images/blog/quest_creator_preset_prereqs.png"
-            alt="Quest creation window with a &quot;Becoming Batman&quot; quest with a simple description and two prerequisites: is in &quot;Batcave&quot; and has 10 &quot;Batarangs&quot;.">
-
-          <h3>Objectives</h3>
 
           <p>
             Finally, you can specify a number of objectives for a quest. These start updating as soon as the quest is
@@ -228,8 +229,16 @@ python quest_creation_tool.py</code></pre>
             objectives. We will discuss custom objectives, dependencies, and optionality later.
           </p>
 
-          <img src="images/blog/quest_creator_preset_objectives.png"
-            alt="Quest creation window with two objecitves specified: talk to &quot;Alfred&quot;, and kill 1 bat.">
+          <div class="images_container">
+            <div class="image_container">
+              <img src="images/blog/quest_creator_preset_prereqs.png"
+                alt="Quest creation window with a &quot;Becoming Batman&quot; quest with a simple description and two prerequisites: is in &quot;Batcave&quot; and has 10 &quot;Batarangs&quot;.">
+            </div>
+            <div class="image_container">
+              <img src="images/blog/quest_creator_preset_objectives.png"
+                alt="Quest creation window with two objecitves specified: talk to &quot;Alfred&quot;, and kill 1 bat.">
+            </div>
+          </div>
 
           <h3>Export / Import</h3>
 
@@ -239,8 +248,12 @@ python quest_creation_tool.py</code></pre>
             then press "Import" and select the JSON file to which you exported before.
           </p>
 
-          <img src="images/blog/quest_creator_export_quest.png"
-            alt="Save dialogue. The quest is being saved as &quot;batman_quests.json&quot;.">
+          <div class="images_container">
+            <div class="image_container">
+              <img src="images/blog/quest_creator_export_quest.png"
+                alt="Save dialogue. The quest is being saved as &quot;batman_quests.json&quot;.">
+            </div>
+          </div>
 
           <h2 id="q_implement_quest">Registering your quests to your game</h2>
 
@@ -321,11 +334,18 @@ QuestManager()
             the quest appeared.
           </p>
 
-          <img src="images/blog/quest_prereq_not_met.png"
-            alt="A screenshot of the game where the player is in a grassy area and the quest does not show up in the quest log.">
-
-          <img src="images/blog/quest_prereq_met.png"
-            alt="A screenshot of the game where the player in in the cave area and the quest has shown up and is showing the two prerequisites.">
+          <div class="images_container">
+            <div class="image_container">
+              <img src="images/blog/quest_prereq_not_met.png"
+                alt="A screenshot of the game where the player is in a grassy area and the quest does not show up in the quest log.">
+            </div>
+          </div>
+          <div class="images_container">
+            <div class="image_container">
+              <img src="images/blog/quest_prereq_met.png"
+                alt="A screenshot of the game where the player in in the cave area and the quest has shown up and is showing the two prerequisites.">
+            </div>
+          </div>
 
           <h3>Dispatching events</h3>
 
@@ -379,14 +399,25 @@ QuestManager()
             that satisfies the second objective, the quest is completed and removed from the active quests. The quest
             log is empty again.
           </p>
-          <img src="images/blog/quest_objectives_not_met.png"
-            alt="A screenshot of the game where the player is in the cave area standing next to an NPC. The quest log shows the quest with uncompleted objectives.">
 
-          <img src="images/blog/quest_objective_1_met.png"
-            alt="A screenshot of the game where the player in in the cave area having interacted with the NPC (indicated in the command line). The quest log shows that the first objective of the quest is completed.">
-
-          <img src="images/blog/quest_objectives_met.png"
-            alt="A screenshot of the game where the player in in the cave area having just killed a bat (indicated in the command line). The quest log is empty again.">
+          <div class="images_container">
+            <div class="image_container">
+              <img src="images/blog/quest_objectives_not_met.png"
+                alt="A screenshot of the game where the player is in the cave area standing next to an NPC. The quest log shows the quest with uncompleted objectives.">
+            </div>
+          </div>
+          <div class="images_container">
+            <div class="image_container">
+              <img src="images/blog/quest_objective_1_met.png"
+                alt="A screenshot of the game where the player in in the cave area having interacted with the NPC (indicated in the command line). The quest log shows that the first objective of the quest is completed.">
+            </div>
+          </div>
+          <div class="images_container">
+            <div class="image_container">
+              <img src="images/blog/quest_objectives_met.png"
+                alt="A screenshot of the game where the player in in the cave area having just killed a bat (indicated in the command line). The quest log is empty again.">
+            </div>
+          </div>
 
           <h2 id="q_advanced" class="collapsible">Advanced Features</h2>
           <div class="collapsible_content">
@@ -408,15 +439,21 @@ QuestManager()
               <code class="hljs">batman_quests.json</code> file.
             </p>
 
-            <img src="images/blog/quest_creator_custom_objective.png"
-              alt="Quest creation window showing the objectives, among which a custom objective with a custom &quot;Do Nothing&quot; type and a &quot;seconds&quot; float parameter set to 5.0.">
-            <img src="images/blog/quest_creator_custom_prerequisite.png"
-              alt="Quest creation window showing the prerequisites, among which a custom prerequisite with a custom &quot;Walked At Most&quot; type and a &quot;steps&quot; integer parameter set to 10.">
-
+            <div class="images_container">
+              <div class="image_container">
+                <img src="images/blog/quest_creator_custom_objective.png"
+                  alt="Quest creation window showing the objectives, among which a custom objective with a custom &quot;Do Nothing&quot; type and a &quot;seconds&quot; float parameter set to 5.0.">
+              </div>
+              <div class="image_container">
+                <img src="images/blog/quest_creator_custom_prerequisite.png"
+                  alt="Quest creation window showing the prerequisites, among which a custom prerequisite with a custom &quot;Walked At Most&quot; type and a &quot;steps&quot; integer parameter set to 10.">
+              </div>
+            </div>
             <p>
               In order to use these custom prerequisites and objectives in our own game implementation, we'll need to
               create our own <code class="hljs">PrerequisiteChecker</code> and <code
-                class="hljs">ObjectiveChecker</code>. Let's start with the
+                class="hljs">ObjectiveChecker</code>.
+              Let's start with the
               <code class="hljs">PrerequisiteChecker</code>. Implementing the <code
                 class="hljs">PrerequisiteChecker</code> interface requires us
               to
@@ -476,18 +513,31 @@ return distanceWalked &lt; prereq.Get&lt;int>("steps");
               the player hasn't walked more than 10 steps.
             </p>
 
-            <img src="images/blog/quest_custom_prereq_met.png"
-              alt="A screenshot of the game where the player in in the cave area and the quest has shown up and is showing the three prerequisites. The console shows the player has walked less than 8 steps.">
-            <img src="images/blog/quest_custom_prereq_not_met.png"
-              alt="A screenshot of the game where the player in in the cave area and the quest has not shown up. The console shows the player has walked more than 8 steps.">
+            <div class="images_container">
+              <div class="image_container">
+                <img src="images/blog/quest_custom_prereq_met.png"
+                  alt="A screenshot of the game where the player in in the cave area and the quest has shown up and is showing the three prerequisites. The console shows the player has walked less than 8 steps.">
+              </div>
+            </div>
+            <div class="images_container">
+              <div class="image_container">
+                <img src="images/blog/quest_custom_prereq_not_met.png"
+                  alt="A screenshot of the game where the player in in the cave area and the quest has not shown up. The console shows the player has walked more than 8 steps.">
+              </div>
+            </div>
 
             <p>
               Now we do still have the problem that as soon as the quest starts, we are spammed with the following
               console
               messages:
             </p>
-            <img src="images/blog/no_objective_checker_exists.png"
-              alt="A screenshot of the console log with numerous error messages stating &quot;No objective checker for Do Nothing&quot;.">
+
+            <div class="images_container">
+              <div class="image_container">
+                <img src="images/blog/no_objective_checker_exists.png"
+                  alt="A screenshot of the console log with numerous error messages stating &quot;No objective checker for Do Nothing&quot;.">
+              </div>
+            </div>
 
             <p>
               It appears we need to create a custom <code class="hljs">ObjectiveChecker</code>, too. When implementing
@@ -608,8 +658,12 @@ private:
               Below is a screenshot of my demo game showing the custom objective in progress.
             </p>
 
-            <img src="images/blog/quest_custom_objective.png"
-              alt="A screenshot of the game where the player in in the cave area and the quest is shown with the custom &quot;Do Nothing&quot; objective in progress.">
+            <div class="images_container">
+              <div class="image_container">
+                <img src="images/blog/quest_custom_objective.png"
+                  alt="A screenshot of the game where the player in in the cave area and the quest is shown with the custom &quot;Do Nothing&quot; objective in progress.">
+              </div>
+            </div>
 
             <h3>Objective dependencies</h3>
 
@@ -638,10 +692,16 @@ private:
               of their individual dependencies. We export once again as <code class="hljs">batman_quests.json</code>
             </p>
 
-            <img src="images/blog/quest_creator_dependent_objectives_1.png"
-              alt="Quest creation window showing the newly created objectives.">
-            <img src="images/blog/quest_creator_dependent_objectives_2.png"
-              alt="Quest creation window showing the 2 objectives marked as optional, and the final objective with dependencies on the other objectives.">
+            <div class="images_container">
+              <div class="image_container">
+                <img src="images/blog/quest_creator_dependent_objectives_1.png"
+                  alt="Quest creation window showing the newly created objectives.">
+              </div>
+              <div class="image_container">
+                <img src="images/blog/quest_creator_dependent_objectives_2.png"
+                  alt="Quest creation window showing the 2 objectives marked as optional, and the final objective with dependencies on the other objectives.">
+              </div>
+            </div>
 
             <p>
               With these new objectives, we need to make sure we actually send events when we travel to a place, but
@@ -663,15 +723,30 @@ void Game::handleAreaUpdates()
               grass.
             </p>
 
-            <img src="images/blog/quest_objective_dependencies_not_met.png"
-              alt="A screenshot of the game where the player in in the cave area and the quest is shown with all objective shown, but none completed, so the &quot;Travel Place&quot; objective shows &quot;DEPENDENCIES NOT MET&quot;.">
-            <img src="images/blog/quest_objective_dependencies_met_1.png"
-              alt="A screenshot of the game where the player in in the cave area and the quest is shown with all objective shown, and the &quot;Do Nothing&quot; objective completed so the &quot;Travel Place&quot; objective is active.">
-            <img src="images/blog/quest_objective_dependencies_met_2.png"
-              alt="A screenshot of the game where the player in in the cave area and the quest is shown with all objective shown, and the &quot;Talk To NPC&quot; and &quot;Kill Creature&quot; objectives completed so the &quot;Travel Place&quot; objective is active.">
-            <img src="images/blog/quest_objective_dependencies_complete.png"
-              alt="A screenshot of the game where the player in in the grass area and the quest window is empty again.">
-
+            <div class="images_container">
+              <div class="image_container">
+                <img src="images/blog/quest_objective_dependencies_not_met.png"
+                  alt="A screenshot of the game where the player in in the cave area and the quest is shown with all objective shown, but none completed, so the &quot;Travel Place&quot; objective shows &quot;DEPENDENCIES NOT MET&quot;.">
+              </div>
+            </div>
+            <div class="images_container">
+              <div class="image_container">
+                <img src="images/blog/quest_objective_dependencies_met_1.png"
+                  alt="A screenshot of the game where the player in in the cave area and the quest is shown with all objective shown, and the &quot;Do Nothing&quot; objective completed so the &quot;Travel Place&quot; objective is active.">
+              </div>
+            </div>
+            <div class="images_container">
+              <div class="image_container">
+                <img src="images/blog/quest_objective_dependencies_met_2.png"
+                  alt="A screenshot of the game where the player in in the cave area and the quest is shown with all objective shown, and the &quot;Talk To NPC&quot; and &quot;Kill Creature&quot; objectives completed so the &quot;Travel Place&quot; objective is active.">
+              </div>
+            </div>
+            <div class="images_container">
+              <div class="image_container">
+                <img src="images/blog/quest_objective_dependencies_complete.png"
+                  alt="A screenshot of the game where the player in in the grass area and the quest window is empty again.">
+              </div>
+            </div>
           </div>
 
           <h2 id="q_under_the_hood" class="collapsible">Under the Hood</h2>
@@ -729,7 +804,8 @@ return quests;
               The base class <code class="hljs">PrerequisiteChecker</code> is an interface with a single virtual <code
                 class="hljs">IsSatisfied()</code> function that returns a boolean. This interface is implemented for
               specific checkers, such as the <code class="hljs">IdAmountPrereqChecker</code> class. This takes a <code
-                class="hljs">std::function&lt;unsigned int(std::string const&)> idAmountQuery</code> and is used for the
+                class="hljs">std::function&lt;unsigned int(std::string const&)> idAmountQuery</code> and is used for
+              the
               item <code class="hljs">PrerequisiteChecker</code>. Below is the <code class="hljs">IsSatisfied()</code>
               implementation. The templated <code class="hljs">Get()</code> function will be explained in the advanced
               section.
@@ -749,7 +825,8 @@ return quests;
                 class="hljs">std::unordered_map&lt;std::string, std::shared_ptr&lt;PrerequisiteChecker>> prereqCheckers;</code>.
               When the <code class="hljs">QuestManager::WithItemChecker()</code> is called, a new <code
                 class="hljs">IdAmountPrereqChecker</code> is
-              created with the function provided, and an entry is added to the hashmap for the string "Has Items". Then
+              created with the function provided, and an entry is added to the hashmap for the string "Has Items".
+              Then
               on <code class="hljs">Update()</code>, for each of the inactive quests' prerequisites, based on the type
               (converted to a string), the
               the <code class="hljs">PrerequisiteChecker</code> is found in the hashmap, and its <code
@@ -759,7 +836,8 @@ return quests;
             <h3>Event System Implementation</h3>
             <p>
               Under the hood, <em>Bequestor</em> uses an Observer pattern [3]. An <code
-                class="hljs">EventDispatcher</code> keeps track of a set of <code class="hljs">Observer</code>s and when
+                class="hljs">EventDispatcher</code> keeps track of a set of <code class="hljs">Observer</code>s and
+              when
               its <code class="hljs">Notify()</code> function is called, it
               calls <code class="hljs">OnNotify()</code> on all of its <code class="hljs">Observer</code>s.
             </p>
@@ -911,8 +989,10 @@ private:
 
           <h2 id="q_conclusion">Conclusion</h2>
           <p>
-            In what essentially has been the user guide for <em>Bequestor</em>, we have gone over all the features that
-            the current version of the tool has to offer. We have created quests with prerequisites and objectives that
+            In what essentially has been the user guide for <em>Bequestor</em>, we have gone over all the features
+            that
+            the current version of the tool has to offer. We have created quests with prerequisites and objectives
+            that
             can be preset ones or fully custom ones, and with possible optional objectives and dependencies between
             objectives. We have then exported these quests to a JSON, and imported them into our own game, using the
             <em>Bequestor</em> library. We also registered the necessary prerequisite and objective checkers, and

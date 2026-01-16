@@ -4230,3 +4230,21 @@ img.u-pull-left {
 .active:after {
     content: "\2B9F";
 }
+
+.images_container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-bottom: var(--vspace-1);
+}
+
+.image_container {
+    border: solid 2px darkred;
+    border-radius: 10px;
+    padding: 2px;
+    margin: 5px;
+}
+
+.image_container img {
+    margin-bottom: 0px;
+}
