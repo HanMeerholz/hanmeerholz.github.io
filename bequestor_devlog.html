@@ -157,14 +157,21 @@
           </p>
 
           <h3>Quest Creator</h3>
-
           <p>
-            In order to run the quest creator tool, traverse to the <code class="hljs">quest_creator</code> folder,
-            create a virtual
-            environment, open the command prompt, and execute the following commands:
+            In order to use the quest creator tool, you need Python 3 installed as a prerequisite.
+          </p>
+          <p>
+            To run the tool, traverse to the <code class="hljs">quest_creator</code> folder, open the command prompt,
+            and execute the following
+            commands to
+            create a virtual environment, activate it, install the dependencies, and run the script (you can omit the
+            first two
+            lines if you want to run it in the global environment):
           </p>
 
-          <pre><code class="language-plaintext">pip install -r requirements.txt
+          <pre><code class="language-plaintext">python -m venv .venv\
+.venv\Scripts\activate
+pip install -r requirements.txt
 python quest_creation_tool.py</code></pre>
 
           <p>
@@ -184,13 +191,25 @@ python quest_creation_tool.py</code></pre>
 
           <h3>Bequestor Library</h3>
           <p>
-            At this time, the library is simply a visual studio project. Download the files, add <code
-              class="hljs">code/bequestor/src</code> to your additional include directories, and from your own VS
-            project, add a reference to the bequestor project.
+            To use the Bequestor library in a Visual Studio project, go to your project settings, then
           </p>
-
+          <ol>
+            <li>
+              For all configurations, under Configuration Properties → C/C++ → General, find Additional Include
+              Directories, and add
+              the path to (a copy of) the <code class="hljs">bequestor/include</code> folder.
+            </li>
+            <li>For your Debug configuration, under Configuration Properties → Linker → Input, find Additional
+              Dependencies, and add the
+              path to (a copy of) the <code class="hljs">bequestor/lib/Debug/bequestor.lib</code> file.
+            </li>
+            <li>For your Release configuration, do the same, but instead add the path to (a copy of) the
+              <code class="hljs">bequestor/lib/Release/bequestor.lib</code> file.
+            </li>
+          </ol>
           <p>
-            (This section will be expanded upon later)
+            Now you can include the right header files in your own source and header files like
+            <code class="hljs">#include &lt;src/quest_manager.hpp></code>.
           </p>
 
           <h2 id="q_create_quest">Creating a simple quest</h2>
