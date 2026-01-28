@@ -2769,6 +2769,8 @@ img.u-pull-left {
     height: 0;
     overflow: hidden;
     padding-bottom: calc(100%/(var(--aspect-ratio)));
+    border: solid 2px darkred;
+    border-radius: 10px;
 }
 
 .video-container iframe,
@@ -3251,7 +3253,6 @@ img.u-pull-left {
 .s-intro__bg {
     aspect-ratio: 16/9;
     width: 100%;
-    background-color: black;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
