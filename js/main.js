@@ -73,9 +73,9 @@
     /* preloader video
         * -------------------------------------------------- */
     const ssLoadVideo = function () {
-        // const video = document.getElementById('intro_video');
-        // video.load();
-        // video.play();
+        const video = document.getElementById('intro_video');
+        video.load();
+        video.play();
     }; // end ssLoadVideo
 
     /* mobile menu

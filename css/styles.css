@@ -3226,7 +3226,7 @@ img.u-pull-left {
     letter-spacing: -.01em;
     margin-top: 0;
     color: black;
-    text-shadow: -1px 0 var(--color-gray-10), 0 1px var(--color-gray-10), 1px 0 var(--color-gray-10), 0 -1px var(--color-gray-10);
+    text-shadow: -1px 0 var(--color-text), 0 1px var(--color-text), 1px 0 var(--color-text), 0 -1px var(--color-text);
 }
 
 .s-intro__text h3 span {
@@ -3235,14 +3235,14 @@ img.u-pull-left {
 
 .s-intro__text-huge {
     --text-huge-size: 24.6rem;
-    font-family: var(--font-3);
+    font-family: var(--font-2);
     font-size: var(--text-huge-size);
     line-height: 1;
     letter-spacing: -0.015em;
     margin-top: calc(var(--text-huge-size) / 2 * -1.2);
     margin-bottom: var(--vspace-1_25);
     color: black;
-    text-shadow: -1px 0 rgb(206, 0, 0), 0 1px rgb(206, 0, 0), 1px 0 rgb(206, 0, 0), 0 -1px rgb(206, 0, 0);
+    text-shadow: -1px 0 var(--color-text), 0 1px var(--color-text), 1px 0 var(--color-text), 0 -1px var(--color-text);
 }
 
 /* --------------------------------------------------------------------
