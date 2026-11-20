@@ -413,6 +413,62 @@
         <div class="column" data-animate-el>
           <div class="folio-item">
             <div class="folio-item__thumb">
+              <a class="folio-item__thumb-link" href="images/portfolio/gallery/g-magnet_mockup.png"
+                title="Bubble To Heaven" data-size="1050x700">
+                <img src="images/portfolio/magnet_mockup.png"
+                  srcset="images/portfolio/magnet_mockup.png 1x, images/portfolio/magnet_mockup@2x.png 2x" alt="">
+              </a>
+            </div>
+            <div class="folio-item__info">
+              <div class="folio-item__meta">
+                <span class="cat">Physics & AI Programmer</span>
+                <a href="https://theanachronist.itch.io/magnet-mock-up/" title="Project Link"
+                  class="project-link">Project
+                  Link</a>
+                <a href="https://theanachronist.itch.io/magnet-mock-up/devlog/1115020/physics-ai/"
+                  title="Project Link" class="project-link">Devlog Post</a>
+              </div>
+              <h4 class="folio-item__title">Magnet Mock-Up</h4>
+            </div>
+            <div class="folio-item__caption">
+              <p>
+                Magnet Mock-Up, themed after playing around with fridge magnets, is more of a 2D physics and AI
+                simulation than it is a game. I made it in the first block of my second year of my study, where each
+                of us chose a specialization. We could choose between graphics, engine & tools, and physics & AI.
+                I chose the latter, as it seemed most in-line with my wanting to develop myself as a gameplay programmer.
+              </p>
+              <p>
+                Whereas previous assignments had been a bit more open, for this one we had a clear structure to
+                follow of features to implement: A* pathfinding, using a CDT (conforming Delaunay triangulations)
+                library to generate a triangulation for the level geometry, then generating a navigational mesh from
+                there, agents to follow paths within this navmesh and track the player, 2D physics colliders and
+                bodies, collision resolution and gravity, raycasting, and of course building a little
+                demo scene/game around it all.
+              </p>
+              <p>
+                However, this was merely the base functionality expected from the project. Throughout the weeks, I
+                had enough time to implement a Fibonacci Heap data structure to help in the A* algorithm, make the
+                navmesh dynamically update as the environment changes, add support for collisions between polygons,
+                and handle rotation and torque forces.
+              </p>
+              <p>
+                Overall, graphically and gameplay-wise, this project is not the most impressive, but I was able to
+                gain a better understanding of, and get practical experience with fundamental AI pathfinding and
+                physics algorithms in games, especially within the context of an ECS-driven game engine.
+              </p>
+              <p>
+                I go into a little bit more detail on my process and implemented features in this short
+                <a href="https://theanachronist.itch.io/magnet-mock-up/devlog/1115020/physics-ai">tech blog</a>. Do
+                also have a look at the <a href="https://theanachronist.itch.io/magnet-mock-up/">demo</a> and download
+                it to play around with all the options (there are many variables to mess around with in the ImGUI menus).
+              </p>
+            </div>
+          </div>
+        </div> <!-- end column -->
+
+        <!-- <div class="column" data-animate-el>
+          <div class="folio-item">
+            <div class="folio-item__thumb">
               <a class="folio-item__thumb-link" href="images/portfolio/gallery/g-bubble_to_heaven.png"
                 title="Bubble To Heaven" data-size="1050x700">
                 <img src="images/portfolio/bubble_to_heaven.png"
@@ -447,7 +503,7 @@
               </p>
             </div>
           </div>
-        </div> <!-- end column -->
+        </div> end column -->
 
         <div class="column" data-animate-el>
           <div class="folio-item">
