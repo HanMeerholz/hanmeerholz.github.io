@@ -103,6 +103,14 @@
     --color-1-light: hsla(0, 12%, 58%, 1);
     --color-1-dark: hsla(0, 12%, 38%, 1);
     --color-1-darker: hsla(0, 12%, 28%, 1);
+    --color-1-accent: hsla(0, 60%, 38%, 1);
+
+    --color-tag-red:rgb(155, 41, 39);
+    --color-tag-orange: rgb(155, 91, 39);
+    --color-tag-yellow: rgb(155, 149, 39);
+    --color-tag-green: rgb(74, 155, 39);
+    --color-tag-blue: rgb(39, 107, 155);
+    --color-tag-purple: rgb(107, 39, 155);
 
     --color-2-lighter: hsla(236, 13%, 36%, 1);
     --color-2-light: hsla(236, 13%, 26%, 1);
@@ -239,6 +247,7 @@
      */
     --text-scale-ratio: 1.2;
     --text-size: var(--base-font-size);
+    --text-xxs: calc((var(--text-size) / var(--text-scale-ratio)) / var(--text-scale-ratio) / var(--text-scale-ratio));
     --text-xs: calc((var(--text-size) / var(--text-scale-ratio)) / var(--text-scale-ratio));
     --text-sm: calc(var(--text-xs) * var(--text-scale-ratio));
     --text-md: calc(var(--text-sm) * var(--text-scale-ratio) * var(--text-scale-ratio));
@@ -253,6 +262,7 @@
     /* default button height
      */
     --vspace-btn: var(--vspace-2);
+    --vspace-btn-small: var(--vspace-0_75);
 }
 
 /* on mobile devices below 600px, change the value of '--multiplier' 
@@ -3747,24 +3757,33 @@ img.u-pull-left {
 }
 
 .folio-item__title {
-    margin: 0;
+    text-align: center;
+    margin: 0px;
+    margin-bottom: 20px;
 }
 
 .folio-item__meta {
+    flex-direction: column;
+}
+
+.folio-item__meta .folio-item__meta-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: var(--font-1);
     font-size: var(--text-sm);
     line-height: 1.5;
     margin-bottom: 0.2rem;
     color: var(--color-gray-12);
+    flex-wrap: wrap;
 }
 
-.folio-item__meta .project-link {
+.project-link {
     color: var(--color-text);
-    margin: 0 .8rem;
 }
 
-.folio-item__meta .project-link:focus,
-.folio-item__meta .project-link:hover {
+.project-link:focus,
+.project-link:hover {
     color: var(--color-1);
 }
 
@@ -4248,4 +4267,105 @@ img.u-pull-left {
 
 .image_container img {
     margin-bottom: 0px;
+}
+
+/* CSS */
+.button-33 {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: var(--text-xxs);
+  --btn-height: var(--vspace-btn-small);
+  letter-spacing: .15em;
+  background-color: var(--color-1-accent);
+  border-radius: 20px;
+  box-shadow: hsla(0, 12%, 28%, 20%) 0 -25px 18px -14px inset, hsla(0, 12%, 28%, 15%) 0 1px 2px,hsla(0, 12%, 28%, 15%) 0 2px 4px,hsla(0, 12%, 28%, 15%) 0 4px 8px,hsla(0, 12%, 28%, 15%) 0 8px 16px,hsla(0, 12%, 28%, 15%) 0 16px 32px;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  display: inline-block;
+  padding: 3px 1.8rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: all 250ms;
+  border: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-33:hover {
+  box-shadow: hsla(0, 12%, 28%, 35%) 0 -25px 18px -14px inset,hsla(0, 12%, 28%, 25%) 0 1px 2px,hsla(0, 12%, 28%, 25%) 0 2px 4px,hsla(0, 12%, 28%, 25%) 0 4px 8px,hsla(0, 12%, 28%, 25%) 0 8px 16px,hsla(0, 12%, 28%, 25%) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.tag-type {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-family: var(--font-1);
+  font-size: var(--text-xxs);
+  letter-spacing: .15em;
+  background-color: var(--color-tag-green);
+  border-radius: 20px;
+  box-shadow: hsla(0, 12%, 28%, 20%) 0 -25px 18px -14px inset, hsla(0, 12%, 28%, 15%) 0 1px 2px,hsla(0, 12%, 28%, 15%) 0 2px 4px,hsla(0, 12%, 28%, 15%) 0 4px 8px,hsla(0, 12%, 28%, 15%) 0 8px 16px,hsla(0, 12%, 28%, 15%) 0 16px 32px;
+  color: var(--color-text-dark);
+  display: inline-block;
+  padding: 3px 1.8rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  border: 0;
+}
+
+.tag-team-size {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-family: var(--font-1);
+  font-size: var(--text-xxs);
+  letter-spacing: .15em;
+  background-color: var(--color-tag-blue);
+  border-radius: 20px;
+  box-shadow: hsla(0, 12%, 28%, 20%) 0 -25px 18px -14px inset, hsla(0, 12%, 28%, 15%) 0 1px 2px,hsla(0, 12%, 28%, 15%) 0 2px 4px,hsla(0, 12%, 28%, 15%) 0 4px 8px,hsla(0, 12%, 28%, 15%) 0 8px 16px,hsla(0, 12%, 28%, 15%) 0 16px 32px;
+  color: var(--color-text-dark);
+  display: inline-block;
+  padding: 3px 1.8rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  border: 0;
+}
+
+.tag-role {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-family: var(--font-1);
+  font-size: var(--text-xxs);
+  letter-spacing: .15em;
+  background-color: var(--color-tag-purple);
+  border-radius: 20px;
+  box-shadow: hsla(0, 12%, 28%, 20%) 0 -25px 18px -14px inset, hsla(0, 12%, 28%, 15%) 0 1px 2px,hsla(0, 12%, 28%, 15%) 0 2px 4px,hsla(0, 12%, 28%, 15%) 0 4px 8px,hsla(0, 12%, 28%, 15%) 0 8px 16px,hsla(0, 12%, 28%, 15%) 0 16px 32px;
+  color: var(--color-text-dark);
+  display: inline-block;
+  padding: 3px 1.8rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  border: 0;
+}
+
+.tag-tool {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-family: var(--font-1);
+  font-size: var(--text-xxs);
+  letter-spacing: .15em;
+  background-color: var(--color-tag-yellow);
+  border-radius: 20px;
+  box-shadow: hsla(0, 12%, 28%, 20%) 0 -25px 18px -14px inset, hsla(0, 12%, 28%, 15%) 0 1px 2px,hsla(0, 12%, 28%, 15%) 0 2px 4px,hsla(0, 12%, 28%, 15%) 0 4px 8px,hsla(0, 12%, 28%, 15%) 0 8px 16px,hsla(0, 12%, 28%, 15%) 0 16px 32px;
+  color: var(--color-text-dark);
+  display: inline-block;
+  padding: 3px 1.8rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  border: 0;
 }
