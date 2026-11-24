@@ -3470,6 +3470,7 @@ img.u-pull-left {
     margin-top: var(--vspace-2_5);
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 }
 
 .s-about__skills .skill-bars li {
@@ -4269,7 +4270,6 @@ img.u-pull-left {
     margin-bottom: 0px;
 }
 
-/* CSS */
 .button-33 {
   margin-left: 10px;
   margin-right: 10px;
@@ -4298,7 +4298,7 @@ img.u-pull-left {
   transform: scale(1.05) rotate(-1deg);
 }
 
-.tag-type {
+.tag {
   margin-left: 10px;
   margin-right: 10px;
   font-family: var(--font-1);
@@ -4316,56 +4316,61 @@ img.u-pull-left {
   border: 0;
 }
 
+.tag-type {
+  background-color: var(--color-tag-green);
+}
+
 .tag-team-size {
-  margin-left: 10px;
-  margin-right: 10px;
-  font-family: var(--font-1);
-  font-size: var(--text-xxs);
-  letter-spacing: .15em;
   background-color: var(--color-tag-blue);
-  border-radius: 20px;
-  box-shadow: hsla(0, 12%, 28%, 20%) 0 -25px 18px -14px inset, hsla(0, 12%, 28%, 15%) 0 1px 2px,hsla(0, 12%, 28%, 15%) 0 2px 4px,hsla(0, 12%, 28%, 15%) 0 4px 8px,hsla(0, 12%, 28%, 15%) 0 8px 16px,hsla(0, 12%, 28%, 15%) 0 16px 32px;
-  color: var(--color-text-dark);
-  display: inline-block;
-  padding: 3px 1.8rem;
-  text-align: center;
-  text-decoration: none;
-  text-transform: none;
-  border: 0;
 }
 
 .tag-role {
-  margin-left: 10px;
-  margin-right: 10px;
-  font-family: var(--font-1);
-  font-size: var(--text-xxs);
-  letter-spacing: .15em;
   background-color: var(--color-tag-purple);
-  border-radius: 20px;
-  box-shadow: hsla(0, 12%, 28%, 20%) 0 -25px 18px -14px inset, hsla(0, 12%, 28%, 15%) 0 1px 2px,hsla(0, 12%, 28%, 15%) 0 2px 4px,hsla(0, 12%, 28%, 15%) 0 4px 8px,hsla(0, 12%, 28%, 15%) 0 8px 16px,hsla(0, 12%, 28%, 15%) 0 16px 32px;
-  color: var(--color-text-dark);
-  display: inline-block;
-  padding: 3px 1.8rem;
-  text-align: center;
-  text-decoration: none;
-  text-transform: none;
-  border: 0;
 }
 
 .tag-tool {
-  margin-left: 10px;
-  margin-right: 10px;
-  font-family: var(--font-1);
-  font-size: var(--text-xxs);
-  letter-spacing: .15em;
   background-color: var(--color-tag-yellow);
-  border-radius: 20px;
-  box-shadow: hsla(0, 12%, 28%, 20%) 0 -25px 18px -14px inset, hsla(0, 12%, 28%, 15%) 0 1px 2px,hsla(0, 12%, 28%, 15%) 0 2px 4px,hsla(0, 12%, 28%, 15%) 0 4px 8px,hsla(0, 12%, 28%, 15%) 0 8px 16px,hsla(0, 12%, 28%, 15%) 0 16px 32px;
-  color: var(--color-text-dark);
-  display: inline-block;
-  padding: 3px 1.8rem;
-  text-align: center;
-  text-decoration: none;
-  text-transform: none;
-  border: 0;
+}
+
+
+.tag-type {
+  background-color: var(--color-tag-green);
+}
+
+.tag-team-size {
+  background-color: var(--color-tag-blue);
+}
+
+.tag-role {
+  background-color: var(--color-tag-purple);
+}
+
+.tag-skill-foundation {
+  background-color: var(--color-tag-blue);
+  font-size: var(--text-s);
+}
+
+.tag-skill-hard {
+  background-color: var(--color-tag-red);
+  font-size: var(--text-s);
+}
+
+.tag-skill-tool {
+  background-color: var(--color-tag-orange);
+  font-size: var(--text-s);
+}
+
+.tag-skill-language {
+  background-color: var(--color-tag-green);
+  font-size: var(--text-s);
+}
+
+.tag-skill-pr-language {
+  background-color: var(--color-tag-yellow);
+  font-size: var(--text-s);
+}
+
+.tag-skill-soft {
+  background-color: var(--color-tag-purple);
+  font-size: var(--text-s);
 }
