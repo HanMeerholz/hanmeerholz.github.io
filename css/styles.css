@@ -3360,7 +3360,7 @@ img.u-pull-left {
 }
 
 .s-about__block {
-    margin-bottom: var(--vspace-2);
+    margin-bottom: var(--vspace);
 }
 
 .s-about__timeline {
@@ -4029,7 +4029,8 @@ img.u-pull-left {
  *
  * ------------------------------------------------------------------- */
 .s-footer {
-    padding-top: calc(6 * var(--space));
+    background-color: black;
+    padding-top: calc(var(--space));
     padding-bottom: var(--vspace-2_5);
     font-weight: 300;
     position: relative;
